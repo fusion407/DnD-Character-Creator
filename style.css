@@ -1,3 +1,7 @@
+body {
+    background-color: rgb(171, 59, 55);
+    color: rgb(38, 1, 0) 
+}
 #header {
     display: flex;
     justify-content: center;
@@ -15,11 +19,15 @@
 
 .new-character-container {
     display: flex;
+
     justify-content: center;
 
 }
 .create-character-container {
     display: none;
+    background-color: rgb(143, 40, 40);
+    height: auto;
+    width: auto;
     justify-content: center;
 
 }
@@ -30,4 +38,5 @@
 .submit {
     justify-content: center;
     margin-left: 70px;
+    margin-bottom: 15px;
 }
