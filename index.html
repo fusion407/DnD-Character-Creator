@@ -1,0 +1,53 @@
+<!doctype html>
+<html>
+    <head>
+        <title>Our Funky HTML Page</title>
+        <meta name="description" content="Our first page">
+        <meta name="keywords" content="html tutorial template">
+        <link rel="stylesheet" href="style.css">
+
+    </head>
+<body>
+    <div>
+        <div id="header">
+            <h1>Dungeons & Dragons</h1>
+        </div>
+        <div id="header2">
+            <h3>Character Creator</h3>
+        </div>
+    </div>
+    <div class="create-character-container">
+        <div class="form-container">
+            <form action="" method="post" id="addCharacter">
+                <div class="field">
+                    <label for="name">Name:</label>
+                    <input type="text" id="name" name="name" placeholder="Enter name" />
+                    <small></small>
+                </div>
+                <div class="field">
+                    <label for="race">Race:</label>
+                    <select id="race" name="race"></select>
+                    <small></small>
+                </div>
+                <div class="field">
+                    <label for="class">Class:</label>
+                    <select id="class" name="class"></select>
+                    <small></small>
+                </div>
+                <div class="field">
+                    <label for="Background">Background:</label>
+                    <select id="background" name="background"></select>
+                    <small></small>
+                </div>
+                <div>
+                    <input type="submit" name="submit" value="Create Character" class="submit">
+                </div>
+            </form>
+        </div>
+    </div>
+    <div class="new-character-container">
+        <button id="new-character-button">New Character</button>
+    </div>
+    <script src="index.js"></script>
+</body>
+</html>

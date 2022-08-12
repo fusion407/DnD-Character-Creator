@@ -1,0 +1,33 @@
+#header {
+    display: flex;
+    justify-content: center;
+    margin-bottom: -30px;
+}
+#header2 {
+    display: flex;
+    justify-content: center;
+
+}
+.second-header {
+    display: flex;
+    justify-content: center;
+}
+
+.new-character-container {
+    display: flex;
+    justify-content: center;
+
+}
+.create-character-container {
+    display: none;
+    justify-content: center;
+
+}
+.field {
+    display: block;
+    margin: 20px;
+}
+.submit {
+    justify-content: center;
+    margin-left: 70px;
+}
