@@ -40,3 +40,8 @@ body {
     margin-left: 70px;
     margin-bottom: 15px;
 }
+.description-container {
+    display: inline-block;
+    border-color: black;
+    border-radius: 10px;
+}
