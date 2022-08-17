@@ -43,15 +43,19 @@ body {
 .description-container {
     display: inline-block;
     border-color: black;
-    border-radius: 10px;
 }
 .description {
     display: inline-flex;
-    width: 50%;
+    width: 60%;
     margin-left: 10%;
+    margin-right: -10%;
     font-weight: bold;
     font-size: small;
 }
-div#form-container {
+.form-container {
+    margin-left: 25%;
+}
+.action-points-container {
     margin-left: 10%;
+    margin-right: -10%;
 }
