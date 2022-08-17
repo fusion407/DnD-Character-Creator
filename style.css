@@ -28,6 +28,7 @@ body {
     flex-direction: column;
     background-color: rgb(143, 40, 40);
     height: auto;
+    align-self: center;
     width: auto;
     justify-content: center;
 
@@ -63,7 +64,7 @@ div.description p {
 .action-points-container {
     display: grid;
     margin-top: 20px;
-    width: 40%;
+    width: auto;
     align-self: center;
     /* margin-left: 10%; */
     grid-template-columns: repeat(3, 1fr);
