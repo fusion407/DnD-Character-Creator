@@ -52,13 +52,13 @@ div.description-container {
 div.description p {
     display: flex;
     flex-direction: column;
-    width: 80%;
+    width: auto;
     font-weight: bold;
     font-size: small;
 }
 .form-container {
     display: flex;
-    margin: 30px;
+    margin: 15px;
     justify-content: center;
 }
 .action-points-container {
@@ -69,5 +69,12 @@ div.description p {
     /* margin-left: 10%; */
     grid-template-columns: repeat(3, 1fr);
     column-gap: 10px;
-    row-gap: 50px;
+    row-gap: 30px;
   }
+/* For mobile phones: */
+@media only screen and (max-device-width: 480px) {
+    .action-points-container {
+        width:fit-content;
+        column-gap: 1px;
+    }
+}
