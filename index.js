@@ -53,7 +53,7 @@ function changeBackgroundDescription() {
     const backgroundDescription = document.getElementById('background-description');
     backgroundDescription.innerHTML = `<div>
                                             <h2>${backgroundDropdown.value}</h2>
-                                            <p>work in progress</p>
+                                            <p>API not available</p>
                                         </div>`;
 
 
@@ -87,6 +87,9 @@ document.addEventListener("DOMContentLoaded", () => {
         console.log('i work')
         newCharacterContainer[0].style.display = "none";
         createCharacterContainer[0].style.display = 'flex'
+        changeRaceDescription();
+        changeClassDescription();
+        changeBackgroundDescription();
     })
 
     // dropdown event listeners
