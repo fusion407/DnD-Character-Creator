@@ -19,7 +19,7 @@ body {
 
 .new-character-container {
     display: flex;
-
+    width: auto;
     justify-content: center;
 
 }
@@ -44,4 +44,14 @@ body {
     display: inline-block;
     border-color: black;
     border-radius: 10px;
+}
+.description {
+    display: inline-flex;
+    width: 50%;
+    margin-left: 10%;
+    font-weight: bold;
+    font-size: small;
+}
+div#form-container {
+    margin-left: 10%;
 }
