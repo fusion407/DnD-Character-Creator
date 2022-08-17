@@ -25,6 +25,7 @@ body {
 }
 .create-character-container {
     display: none;
+    flex-direction: column;
     background-color: rgb(143, 40, 40);
     height: auto;
     width: auto;
@@ -40,22 +41,32 @@ body {
     margin-left: 70px;
     margin-bottom: 15px;
 }
-.description-container {
-    display: inline-block;
+div.description-container {
+    display: flex;
+    width: 40%;
+    align-self: center;
+    flex-direction: column;
     border-color: black;
 }
-.description {
-    display: inline-flex;
-    width: 60%;
-    margin-left: 10%;
-    margin-right: -10%;
+div.description p {
+    display: flex;
+    flex-direction: column;
+    width: 80%;
     font-weight: bold;
     font-size: small;
 }
 .form-container {
-    margin-left: 25%;
+    display: flex;
+    margin: 30px;
+    justify-content: center;
 }
 .action-points-container {
-    margin-left: 10%;
-    margin-right: -10%;
-}
+    display: grid;
+    margin-top: 20px;
+    width: 40%;
+    align-self: center;
+    /* margin-left: 10%; */
+    grid-template-columns: repeat(3, 1fr);
+    column-gap: 10px;
+    row-gap: 50px;
+  }
