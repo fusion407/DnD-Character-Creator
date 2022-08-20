@@ -23,39 +23,27 @@
         <div class="action-points-container">
             <div class="str">
                 <label for="strength">Strength:</label>
-                <select name="str" id="strength">
-                    <option value="1">1</option>
-                </select>
+                <input type="text" name="str" id="strength">
             </div>
             <div class="con">
                 <label for="constitution">Constitution:</label>
-                <select name="con" id="constitution">
-                    <option value="1">1</option>
-                </select>
+                <input type="text" name="con" id="constitution">
             </div>
             <div class="dex">
                 <label for="dexterity">Dexterity:</label>
-                <select name="dex" id="dexterity">
-                    <option value="1">1</option>
-                </select>             
+                <input type="text" name="dex" id="dexterity">         
             </div>
             <div class="int">
                 <label for="intelligence">Intelligence:</label>
-                <select name="int" id="intelligence">
-                    <option value="1">1</option>
-                </select>
+                <input type="text" name="int" id="intelligence">
             </div>
             <div class="wis">
                 <label for="wisdom">Wisdom:</label>
-                <select name="wis" id="wisdom">
-                    <option value="1">1</option>
-                </select>
+                <input type="text" name="wis" id="wisdom">
             </div>
             <div class="cha">
                 <label for="charisma">Charisma:</label>
-                <select name="cha" id="charisma">
-                    <option value="1">1</option>
-                </select>
+                <input type="text" name="cha" id="charisma">
             </div>
         </div>
         <div class="form-container">
@@ -68,18 +56,21 @@
                 <div class="field">
                     <label for="race">Race:</label>
                     <select id="race" name="race">
-                        <option value="human">Human</option>
-                        <option value="dwarf">Dwarf</option>
-                        <option value="dragonborn">Dragonborn</option>
-                        <option value="elf">Elf</option>
-                        <option value="gnome">Gnome</option>
-                        <option value="half-elf">Half-Elf</option>
-                        <option value="halfling">Halfling</option>
-                        <option value="half-orc">Half-Orc</option>
-                        <option value="tiefling">Tiefling</option>
+                        <option value="Human">Human</option>
+                        <option value="Dwarf">Dwarf</option>
+                        <option value="Dragonborn">Dragonborn</option>
+                        <option value="Elf">Elf</option>
+                        <option value="Gnome">Gnome</option>
+                        <option value="Half-Elf">Half-Elf</option>
+                        <option value="Halfling">Halfling</option>
+                        <option value="Half-orc">Half-Orc</option>
+                        <option value="Tiefling">Tiefling</option>
                     </select>
-
-                    <small></small>
+                    <!-- <label for="subrace">SubRace:</label> -->
+                    <!-- work in progress -->
+                    <!-- <select id="subrace" name="subrace">
+                    </select>
+                    <small></small> -->
                 </div>
                 <div class="field">
                     <label for="class">Class:</label>
@@ -97,6 +88,7 @@
                         <option value="warlock">Warlock</option>
                         <option value="wizard">Wizard</option>
                     </select>
+
                     <small></small>
                 </div>
                 <div class="field">
@@ -118,6 +110,21 @@
                     </select>
                     <small></small>
                 </div>
+                <div class="field">
+                    <label for="Alignment">Alignment:</label>
+                    <select id="alignment" name="alignment">
+                        <option value="lawful-good">Lawful Good</option>
+                        <option value="neutral-good">Neutral Good</option>
+                        <option value="chaotic-good">Chaotic Good</option>
+                        <option value="lawful-neutral">Lawful Neutral</option>
+                        <option value="true-neutral">True Neutral</option>
+                        <option value="chaotic-neutral">Chaotic Neutral</option>
+                        <option value="lawful-evil">Lawful Evil</option>
+                        <option value="neutral-evil">Neutral Evil</option>
+                        <option value="chaotice-evil">Chaotic Evil</option>
+                    </select>
+                    <small></small>
+                </div>
                 <div>
                     <input type="submit" name="submit" value="Create Character" class="submit">
                 </div>
@@ -135,10 +142,8 @@
                     class description
                 </h2> -->
             </div>
-            <div class="description" id="background-description">
-                <!-- <h2>
-                    background description
-                </h2> -->
+            <div class="alignment" id="alignment-description">
+                <!-- alignment description -->
             </div>
         </div>
     </div>

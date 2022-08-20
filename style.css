@@ -38,6 +38,12 @@ body {
     display: block;
     margin: 20px;
 }
+input[type="text"] {
+    width: 15px;
+}
+input#name {
+    width: auto;
+}
 .submit {
     justify-content: center;
     margin-left: 70px;
@@ -54,8 +60,6 @@ div.description p {
     display: flex;
     flex-direction: column;
     width: auto;
-    font-weight: bold;
-    font-size: small;
 }
 .form-container {
     display: flex;
