@@ -3,6 +3,14 @@ const alignmentDropdown = document.querySelector('select#alignment')
 const classDropdown = document.querySelector('select#class')
 const backgroundDropdown = document.querySelector('select#background')
 
+// ability point bonuses
+let str = 0;
+let con = 0;
+let dex = 0;
+let int = 0;
+let wis = 0;
+let cha = 0;
+
 
 // work in progress
 // function getSubRace(race) {
@@ -29,7 +37,7 @@ const backgroundDropdown = document.querySelector('select#background')
 //         return;
 //     }
 // }
-async function changeRaceDescription() {
+function changeRaceDescription() {
     console.log("called race description function")
     fetch(`https://www.dnd5eapi.co/api/races/${raceDropdown.value.toLowerCase()}`, {
         method: 'GET',
@@ -42,12 +50,43 @@ async function changeRaceDescription() {
     .then(data => {
         const raceDescription = document.getElementById('race-description');
         const raceDiv = document.createElement('h2')
+        const bonuses = data.ability_bonuses
+
+             // debug                            
+        bonuses.forEach(element => 
+            console.log(
+                element.ability_score.index + ' ' +
+                element.bonus
+            
+        ));
+        bonuses.forEach(element => {
+            if(element.ability_score.index === 'str') {
+                str = element.bonus;
+            }
+            if(element.ability_score.index === 'con') {
+                con = element.bonus;
+            }
+            if(element.ability_score.index === 'dex') {
+                dex = element.bonus;
+            }
+            if(element.ability_score.index === 'int') {
+                int = element.bonus;
+            }
+            if(element.ability_score.index === 'wis') {
+                wis = element.bonus;
+            }
+            if(element.ability_score.index === 'cha') {
+                cha = element.bonus;
+            }
+        });              
         // raceDiv.innerHTML = 'hello world'
         raceDescription.appendChild(raceDiv);
         raceDescription.innerHTML = `<div>
                                         <h2>${data.name}</h2>
+                                        <p>Spped: ${data.speed}</p>
                                         <p>Languages: ${data.language_desc}</p>
                                      </div>`;
+ 
         // getSubRace(data.name);
     });
 }
@@ -98,7 +137,7 @@ function changeClassDescription() {
 
 
 function changeAlignmentDescription() {
-    console.log("called class description function")
+    console.log("called alignment description function")
     fetch(`https://www.dnd5eapi.co/api/alignments/${alignmentDropdown.value}`, {
         method: 'GET',
         headers: {
@@ -129,7 +168,6 @@ document.addEventListener("DOMContentLoaded", () => {
 
     // hides new character container and displays create character container
     newCharacterBtn.addEventListener('click', () => {
-        console.log('i work')
         newCharacterContainer[0].style.display = "none";
         createCharacterContainer[0].style.display = 'flex'
         changeRaceDescription();
