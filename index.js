@@ -81,7 +81,7 @@ function changeRaceDescription() {
         });              
         // raceDiv.innerHTML = 'hello world'
         raceDescription.appendChild(raceDiv);
-        raceDescription.innerHTML = `<div>
+        raceDescription.innerHTML = `<div class="desc">
                                         <h2>${data.name}</h2>
                                         <p>Spped: ${data.speed}</p>
                                         <p>Languages: ${data.language_desc}</p>
@@ -102,7 +102,7 @@ function changeClassDescription() {
     .then(response => response.json())
     .then(data => {
         const classDescription = document.getElementById('class-description');
-        classDescription.innerHTML = `<div>
+        classDescription.innerHTML = `<div class="desc">
                                         <h2>${data.name}</h2>
                                         <p>Hit Die: ${data.hit_die}</p>
                                      </div>`;
@@ -148,7 +148,7 @@ function changeAlignmentDescription() {
     .then(response => response.json())
     .then(data => {
         const alignmentDescription = document.getElementById('alignment-description');
-        alignmentDescription.innerHTML = `<div>
+        alignmentDescription.innerHTML = `<div class="desc">
                                             <h2>${data.name}</h2>
                                             <p>Alignment: ${data.desc}</p>
                                           </div>`;
