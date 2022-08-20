@@ -30,7 +30,7 @@ body {
     background-color: rgb(143, 40, 40);
     height: auto;
     align-self: center;
-    width: auto;
+    width: fit-content;
     justify-content: center;
 
 }
@@ -38,8 +38,15 @@ body {
     display: block;
     margin: 20px;
 }
+label {
+    font-weight: bold;
+}
 input[type="text"] {
     width: 15px;
+}
+.action-points {
+    display: flex;
+    justify-content: right;
 }
 input#name {
     width: auto;
