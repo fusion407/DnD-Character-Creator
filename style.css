@@ -33,10 +33,7 @@ body {
     border-style: solid;
     border-color: black;
     height: auto;
-    align-self: center;
-    width: fit-content;
-    justify-content: center;
-    align-self: center;
+    width: auto;
 
 }
 .field {
@@ -45,6 +42,7 @@ body {
 }
 label {
     font-weight: bold;
+    align-self: baseline;
 }
 input[type="text"] {
     width: 15px;
@@ -70,7 +68,7 @@ div.description-container {
     align-self: center;
     flex-direction: column;
     border-color: black;
-    width: fit-content;
+    width: auto;
     align-self: center;
     padding: -2em;
     margin: auto;
@@ -95,9 +93,8 @@ div.description p {
     margin-top: 20px;
     width: auto;
     align-self: center;
-    /* margin-left: 10%; */
     grid-template-columns: repeat(3, 1fr);
-    column-gap: 10px;
+    column-gap: 15px;
     row-gap: 30px;
     width: fit-content;
   }
@@ -105,7 +102,29 @@ div.description p {
 @media only screen and (max-device-width: 480px) {
     .action-points-container {
         width:fit-content;
+        font-size: xx-large;
         column-gap: 1px;
+    }
+    div#header {
+        font-size: xx-large;
+    }
+    div#header2 {
+        font-size: xx-large;
+        margin-top: -2em;
+    }
+    .new-character-container {
+        font-size:large;
+    }
+    /* .create-character-container {
+        width: auto;
+        align-content: center;
+        align-items: center;
+    } */
+    .form-container {
+        font-size: xx-large;
+    }
+    div.description-container {
+        font-size: xx-large;
     }
 
 }
