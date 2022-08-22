@@ -3,6 +3,10 @@ const alignmentDropdown = document.querySelector('select#alignment')
 const classDropdown = document.querySelector('select#class')
 const backgroundDropdown = document.querySelector('select#background')
 
+// description boxes
+const classDescription = document.getElementById('class-description')
+const backgroundDescription = document.getElementById('background-description')
+
 // ability point bonuses
 let str = 0;
 let con = 0;
@@ -37,6 +41,7 @@ let cha = 0;
 //         return;
 //     }
 // }
+
 function changeRaceDescription() {
     console.log("called race description function")
     fetch(`https://www.dnd5eapi.co/api/races/${raceDropdown.value.toLowerCase()}`, {
@@ -48,8 +53,11 @@ function changeRaceDescription() {
     }) 
     .then(response => response.json())
     .then(data => {
+        const desc = document.createElement('div')
+        const abilityPoints = document.createElement('div')
         const raceDescription = document.getElementById('race-description');
-        const raceDiv = document.createElement('h2')
+        raceDescription.innerHTML = ''
+        // const raceDiv = document.createElement('h2')
         const bonuses = data.ability_bonuses
 
              // debug                            
@@ -59,6 +67,12 @@ function changeRaceDescription() {
                 element.bonus
             
         ));
+        str = 0;
+        con = 0;
+        dex = 0;
+        int = 0;
+        wis = 0;
+        cha = 0;
         bonuses.forEach(element => {
             if(element.ability_score.index === 'str') {
                 str = element.bonus;
@@ -80,13 +94,22 @@ function changeRaceDescription() {
             }
         });              
         // raceDiv.innerHTML = 'hello world'
-        raceDescription.appendChild(raceDiv);
-        raceDescription.innerHTML = `<div class="desc">
-                                        <h2>${data.name}</h2>
-                                        <p>Spped: ${data.speed}</p>
-                                        <p>Languages: ${data.language_desc}</p>
-                                     </div>`;
- 
+        // raceDescription.appendChild(raceDiv);
+
+
+        desc.innerHTML = `<h2>${data.name}</h2>
+                          <p>Speed: ${data.speed}</p>
+                          <p>Languages: ${data.language_desc}</p>`;
+        abilityPoints.innerHTML = `<p>Racial Bonuses:</p>
+        <li>Strength: +${str}</li>
+        <li>Constitution: +${con}</li>
+        <li>Dexterity: +${dex}</li>
+        <li>Intelligence: +${int}</li>
+        <li>Wisdom: +${wis}</li>
+        <li>Charisma: +${cha}</li>`
+        desc.setAttribute('class', 'desc')
+        raceDescription.appendChild(desc);
+        desc.appendChild(abilityPoints)
         // getSubRace(data.name);
     });
 }
@@ -162,9 +185,7 @@ document.addEventListener("DOMContentLoaded", () => {
     // buttons
     const newCharacterBtn = document.getElementById('new-character-button')
     
-    // description boxes
-    const classDescription = document.getElementById('class-description')
-    const backgroundDescription = document.getElementById('background-description')
+
 
     // hides new character container and displays create character container
     newCharacterBtn.addEventListener('click', () => {
