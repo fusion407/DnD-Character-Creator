@@ -3,6 +3,11 @@ body {
     color: rgb(38, 1, 0);
     font-family: 'Cinzel', serif;
 }
+.header-container {
+    display: block;
+    align-content: right;
+    position: relative;
+}
 #header {
     display: flex;
     justify-content: center;
@@ -46,6 +51,7 @@ label {
 }
 input[type="text"] {
     width: 15px;
+    color: black;
 }
 .action-points {
     display: flex;
@@ -57,10 +63,45 @@ input#name {
 input#level {
     width: 15px;
 }
+div.image {
+    display: block;
+    justify-content: center;
+    position: absolute;
+    align-items: center;
+    width: 100px;
+    height: 100px;
+    opacity: 0.25;
+    left: 50%;
+    right: 50%;
+    top: 25%;
+    pointer-events: none;
+
+}
+
+input {
+    border: 3px solid black;
+    background-color: rgb(171, 59, 55);
+    color: black;
+}
+button {
+    border: 3px solid black;
+    background-color: rgb(171, 59, 55);
+}
+button:hover {
+    background-color: rgb(177, 83, 80);
+}
+select {
+    border: 3px solid black;
+    background-color: rgb(171, 59, 55);
+}
 .submit {
     justify-content: center;
     margin-left: 70px;
     margin-bottom: 15px;
+    border: 3px solid black;
+}
+.submit:hover {
+    background-color: rgb(177, 83, 80);
 }
 div.description-container {
     display: flex;
@@ -125,6 +166,24 @@ div.description p {
     }
     div.description-container {
         font-size: xx-large;
+    }
+    button {
+        font-size: 25px;
+        width: 300px;
+        height: 150px;
+    }
+    .submit {
+        width: 200px;
+        height: 75px;
+    }
+    .form-container {
+        width: auto;
+        height: auto;
+    }
+    .image1 {
+        width: 50%;
+        height: 50%;
+        transform:translateY(450px);
     }
 
 }

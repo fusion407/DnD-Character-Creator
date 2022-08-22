@@ -11,13 +11,16 @@
 
     </head>
 <body>
-    <div>
+    <div class="header-container">
         <div id="header">
             <h1>Dungeons & Dragons</h1>
         </div>
         <div id="header2">
             <h3>Character Creator</h3>
         </div>
+    </div>
+    <div class="image">
+        <img src="./images/dragon.png"/>
     </div>
     <div class="create-character-container">
         <div class="action-points-container">
@@ -50,7 +53,7 @@
             <form action="" method="post" id="addCharacter">
                 <div class="field">
                     <label for="name">Name:</label>
-                    <input type="text" id="name" name="name" placeholder="Enter name" />
+                    <input type="text" id="name" name="name"/>
                     <small></small>
                 </div>
                 <div class="field">
@@ -155,6 +158,7 @@
     <div class="new-character-container">
         <button id="new-character-button">New Character</button>
     </div>
+
     <script src="index.js"></script>
 </body>
 </html>
