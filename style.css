@@ -168,11 +168,12 @@ div.description p {
         font-size: xx-large;
     }
     button {
-        font-size: 25px;
+        font-size: xx-large;
         width: 300px;
         height: 150px;
     }
     .submit {
+        font-size: x-large;
         width: 200px;
         height: 75px;
     }
@@ -180,10 +181,11 @@ div.description p {
         width: auto;
         height: auto;
     }
-    .image1 {
-        width: 50%;
-        height: 50%;
-        transform:translateY(450px);
+    .image {
+        max-width: 25%;
+        height: auto;
+        transform:translateY(60%);
+        transform:translateX(-90%);
     }
 
 }
