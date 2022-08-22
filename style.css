@@ -71,8 +71,8 @@ div.image {
     width: 100px;
     height: 100px;
     opacity: 0.25;
-    left: 50%;
-    right: 50%;
+    left: 8%;
+    right: 25%;
     top: 25%;
     pointer-events: none;
 
