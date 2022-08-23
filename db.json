@@ -1,0 +1,23 @@
+{
+    "characters": [
+      {
+        "id": 1,
+        "name": "",
+        "level": "",
+        "race": "",
+        "class": "",
+        "background": "",
+        "alighment": "",
+        "ability-points": [
+            {   
+            "strength": "",
+            "constitution": "",
+            "dexterity": "",
+            "intelligence": "",
+            "wisdom": "",
+            "charisma": ""          
+            }
+        ]
+      }
+    ]
+}

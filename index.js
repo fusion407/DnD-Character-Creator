@@ -1,3 +1,4 @@
+// dropdowns
 const raceDropdown = document.querySelector('select#race')
 const alignmentDropdown = document.querySelector('select#alignment')
 const classDropdown = document.querySelector('select#class')
@@ -15,32 +16,55 @@ let int = 0;
 let wis = 0;
 let cha = 0;
 
+function setNewCharacterData() {
+    //name
+    const name = document.querySelector('input#name').value
+    console.log('name: ' + name)
 
-// work in progress
-// function getSubRace(race) {
-//     console.log("called subrace description function")
-//     if(race === raceDropdown.value) {
-//         console.log("fetching subrace...")
-//         fetch(`https://www.dnd5eapi.co/api/races/${raceDropdown.value}/subraces`, {
-//             method: 'GET',
-//             headers: {
-//                 'Content-Type': 'application/json',
-//                 Accept: 'application/json'
-//             }
-//         }) 
-//         .then(response => response.json())
-//         .then(data => {
-//             a = {data: []}
-//             a.data.map(el => (
-//                 console.log(el[results].name[0])
-//             ))
-//             console.log(data.count)
-//         })
-//     }
-//     else {
-//         return;
-//     }
-// }
+    //level
+    const level = parseInt(document.querySelector('input#level').value);
+    console.log('level: ' + level)
+    //class
+
+    const playerRace = document.querySelector('select#race').value;
+    console.log('race: ' + playerRace)
+
+    //background
+    const playerClass = document.querySelector('select#class').value;
+    console.log('class: ' + playerClass)
+
+    //background
+    const playerBackground = document.querySelector('select#background').value;
+    console.log('background: ' + playerBackground)
+
+    //alignment
+    const playerAlignment = document.querySelector('select#alignment').value;
+    console.log('alignment: ' + playerAlignment)
+
+    //abilities
+    const strength = parseInt(document.querySelector('input#strength.action-points').value) + str;
+    console.log('str: ' + strength);
+
+    const constitution = parseInt(document.querySelector('input#constitution.action-points').value) + str;
+    console.log('con: ' + constitution);
+
+    const dexterity = parseInt(document.querySelector('input#dexterity.action-points').value) + str;
+    console.log('dex: ' + dexterity);
+
+    const intelligence = parseInt(document.querySelector('input#intelligence.action-points').value) + str;
+    console.log('int: ' + intelligence);
+
+    const wisdom = parseInt(document.querySelector('input#wisdom.action-points').value) + str;
+    console.log('wis: ' + wisdom);
+
+    const charisma = parseInt(document.querySelector('input#charisma.action-points').value) + str;
+    console.log('cha: ' + charisma);
+
+    //create object with above data
+    //pass into function that handles json server
+    //display new character screen and hide new character container
+    //create character card which appends to new new character container
+}
 
 function changeRaceDescription() {
     console.log("called race description function")
@@ -57,15 +81,12 @@ function changeRaceDescription() {
         const abilityPoints = document.createElement('div')
         const raceDescription = document.getElementById('race-description');
         raceDescription.innerHTML = ''
-        // const raceDiv = document.createElement('h2')
         const bonuses = data.ability_bonuses
-
              // debug                            
         bonuses.forEach(element => 
             console.log(
                 element.ability_score.index + ' ' +
                 element.bonus
-            
         ));
         str = 0;
         con = 0;
@@ -93,24 +114,21 @@ function changeRaceDescription() {
                 cha = element.bonus;
             }
         });              
-        // raceDiv.innerHTML = 'hello world'
-        // raceDescription.appendChild(raceDiv);
-
 
         desc.innerHTML = `<h2>${data.name}</h2>
                           <p>Speed: ${data.speed}</p>
                           <p>Languages: ${data.language_desc}</p>`;
         abilityPoints.innerHTML = `<p>Racial Bonuses:</p>
-        <li>Strength: +${str}</li>
-        <li>Constitution: +${con}</li>
-        <li>Dexterity: +${dex}</li>
-        <li>Intelligence: +${int}</li>
-        <li>Wisdom: +${wis}</li>
-        <li>Charisma: +${cha}</li>`
+                                    <li>Strength: +${str}</li>
+                                    <li>Constitution: +${con}</li>
+                                    <li>Dexterity: +${dex}</li>
+                                    <li>Intelligence: +${int}</li>
+                                    <li>Wisdom: +${wis}</li>
+                                    <li>Charisma: +${cha}</li>`
         desc.setAttribute('class', 'desc')
         raceDescription.appendChild(desc);
         desc.appendChild(abilityPoints)
-        // getSubRace(data.name);
+
     });
 }
 function changeClassDescription() {
@@ -132,33 +150,6 @@ function changeClassDescription() {
     });
 }
 
-
-
-// API currently only supports acolyte so background description
-// returns its own value without fetching data
-// function changeBackgroundDescription() {
-//     console.log("called background description function")
-//     const backgroundDescription = document.getElementById('background-description');
-//     backgroundDescription.innerHTML = `<div>
-//                                             <h2>${backgroundDropdown.value}</h2>
-//                                             <p>API not available</p>
-//                                         </div>`;
-//     fetch(`https://www.dnd5eapi.co/api/backgrounds/${backgroundDropdown.value}`, {
-//         method: 'GET',
-//         headers: {
-//             'Content-Type': 'application/json',
-//             Accept: 'application/json'
-//         }
-//     }) 
-//     .then(response => response.json())
-//     .then(data => {
-//         const backgroundDescription = document.getElementById('background-description');
-//         backgroundDescription.innerHTML = data.name;
-//     });
-// }
-
-
-
 function changeAlignmentDescription() {
     console.log("called alignment description function")
     fetch(`https://www.dnd5eapi.co/api/alignments/${alignmentDropdown.value}`, {
@@ -175,6 +166,7 @@ function changeAlignmentDescription() {
                                             <h2>${data.name}</h2>
                                             <p>Alignment: ${data.desc}</p>
                                           </div>`;
+    
     });
 }
 document.addEventListener("DOMContentLoaded", () => {
@@ -184,9 +176,8 @@ document.addEventListener("DOMContentLoaded", () => {
 
     // buttons
     const newCharacterBtn = document.getElementById('new-character-button')
+    const createCharacterBtn = document.querySelector('input.submit')
     
-
-
     // hides new character container and displays create character container
     newCharacterBtn.addEventListener('click', () => {
         newCharacterContainer[0].style.display = "none";
@@ -194,7 +185,6 @@ document.addEventListener("DOMContentLoaded", () => {
         changeRaceDescription();
         changeClassDescription();
         changeAlignmentDescription();
-        // changeBackgroundDescription();
     })
 
     // dropdown event listeners
@@ -204,10 +194,15 @@ document.addEventListener("DOMContentLoaded", () => {
     classDropdown.addEventListener('change', (e) => {
         changeClassDescription();
     })
-    // backgroundDropdown.addEventListener('change', (e) => {
-    //     changeBackgroundDescription();
-    // })
     alignmentDropdown.addEventListener('change', (e) => {
         changeAlignmentDescription();
+    })
+
+    // create character button
+    createCharacterBtn.addEventListener('click', (e) => {
+        e.preventDefault();
+        setNewCharacterData();
+        newCharacterContainer[0].style.display = "flex";
+        createCharacterContainer[0].style.display = 'none'
     })
 })

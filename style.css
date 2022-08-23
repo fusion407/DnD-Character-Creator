@@ -96,11 +96,16 @@ div.image2 {
 
 }
 input {
+    display: flex;
+    flex-direction: column;
     border: 3px solid black;
     background-color: rgb(171, 59, 55);
     color: black;
 }
 button {
+    display: flex;
+    flex-direction: column;
+    position: relative;
     font-size: large;
     border: 3px solid black;
     background-color: rgb(171, 59, 55);
@@ -162,6 +167,17 @@ div.description p {
     row-gap: 30px;
     width: fit-content;
   }
+  .characterCards {
+    display: grid;
+    position: absolute;
+    text-align: center;
+    border-radius: 3px;
+    border-style: solid;
+    height: auto;
+    width: 300px;
+    top: 50%;
+    align-content: center;
+}
 /* For mobile: */
 @media only screen and (max-device-width: 480px) {
     .action-points-container {
@@ -191,6 +207,7 @@ div.description p {
         width: 400px;
         height: auto;
     }
+
     .submit {
         font-size: xx-large;
         width: 300px;
