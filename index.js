@@ -24,8 +24,8 @@ function setNewCharacterData() {
     //level
     const level = parseInt(document.querySelector('input#level').value);
     console.log('level: ' + level)
+    
     //class
-
     const playerRace = document.querySelector('select#race').value;
     console.log('race: ' + playerRace)
 
@@ -45,19 +45,19 @@ function setNewCharacterData() {
     const strength = parseInt(document.querySelector('input#strength.action-points').value) + str;
     console.log('str: ' + strength);
 
-    const constitution = parseInt(document.querySelector('input#constitution.action-points').value) + str;
+    const constitution = parseInt(document.querySelector('input#constitution.action-points').value) + con;
     console.log('con: ' + constitution);
 
-    const dexterity = parseInt(document.querySelector('input#dexterity.action-points').value) + str;
+    const dexterity = parseInt(document.querySelector('input#dexterity.action-points').value) + dex;
     console.log('dex: ' + dexterity);
 
-    const intelligence = parseInt(document.querySelector('input#intelligence.action-points').value) + str;
+    const intelligence = parseInt(document.querySelector('input#intelligence.action-points').value) + int;
     console.log('int: ' + intelligence);
 
-    const wisdom = parseInt(document.querySelector('input#wisdom.action-points').value) + str;
+    const wisdom = parseInt(document.querySelector('input#wisdom.action-points').value) + wis;
     console.log('wis: ' + wisdom);
 
-    const charisma = parseInt(document.querySelector('input#charisma.action-points').value) + str;
+    const charisma = parseInt(document.querySelector('input#charisma.action-points').value) + cha;
     console.log('cha: ' + charisma);
 
     //create object with above data
@@ -88,12 +88,15 @@ function changeRaceDescription() {
                 element.ability_score.index + ' ' +
                 element.bonus
         ));
+        // making sure bonus values reset
         str = 0;
         con = 0;
         dex = 0;
         int = 0;
         wis = 0;
         cha = 0;
+        // iterate through each ability score element then assigning it's value
+        // to a global variable
         bonuses.forEach(element => {
             if(element.ability_score.index === 'str') {
                 str = element.bonus;
@@ -179,12 +182,20 @@ document.addEventListener("DOMContentLoaded", () => {
     const createCharacterBtn = document.querySelector('input.submit')
     
     // hides new character container and displays create character container
-    newCharacterBtn.addEventListener('click', () => {
+    newCharacterBtn.addEventListener('click', (e) => {
+        e.preventDefault();
         newCharacterContainer[0].style.display = "none";
         createCharacterContainer[0].style.display = 'flex'
         changeRaceDescription();
         changeClassDescription();
         changeAlignmentDescription();
+    })
+    // create character button
+    createCharacterBtn.addEventListener('click', (e) => {
+        e.preventDefault();
+        setNewCharacterData();
+        newCharacterContainer[0].style.display = "flex";
+        createCharacterContainer[0].style.display = 'none'
     })
 
     // dropdown event listeners
@@ -198,11 +209,5 @@ document.addEventListener("DOMContentLoaded", () => {
         changeAlignmentDescription();
     })
 
-    // create character button
-    createCharacterBtn.addEventListener('click', (e) => {
-        e.preventDefault();
-        setNewCharacterData();
-        newCharacterContainer[0].style.display = "flex";
-        createCharacterContainer[0].style.display = 'none'
-    })
+
 })
