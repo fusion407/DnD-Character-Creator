@@ -101,6 +101,23 @@
         "wisdom": null,
         "charisma": null
       }
+    },
+    {
+      "id": 7,
+      "name": "fdsfs",
+      "level": null,
+      "playerRace": "Human",
+      "playerClass": "barbarian",
+      "playerBackground": "Acolyte",
+      "playerAlignment": "lawful-good",
+      "abilities": {
+        "strength": null,
+        "constitution": null,
+        "dexterity": null,
+        "intelligence": null,
+        "wisdom": null,
+        "charisma": null
+      }
     }
   ]
 }
