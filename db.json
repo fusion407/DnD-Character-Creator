@@ -1,23 +1,106 @@
 {
-    "characters": [
-      {
-        "id": 1,
-        "name": "",
-        "level": "",
-        "race": "",
-        "class": "",
-        "background": "",
-        "alighment": "",
-        "ability-points": [
-            {   
-            "strength": "",
-            "constitution": "",
-            "dexterity": "",
-            "intelligence": "",
-            "wisdom": "",
-            "charisma": ""          
-            }
-        ]
+  "characters": [
+    {
+      "id": 1,
+      "name": "irielou",
+      "level": 1,
+      "playerRace": "Human",
+      "playerClass": "barbarian",
+      "playerBackground": "Acolyte",
+      "playerAlignment": "lawful-good",
+      "abilities": {
+        "strength": null,
+        "constitution": null,
+        "dexterity": null,
+        "intelligence": null,
+        "wisdom": null,
+        "charisma": null
       }
-    ]
+    },
+    {
+      "id": 2,
+      "name": "brady",
+      "level": 1,
+      "playerRace": "Elf",
+      "playerClass": "barbarian",
+      "playerBackground": "Acolyte",
+      "playerAlignment": "lawful-good",
+      "abilities": {
+        "strength": 3,
+        "constitution": 4,
+        "dexterity": null,
+        "intelligence": null,
+        "wisdom": null,
+        "charisma": null
+      }
+    },
+    {
+      "id": 3,
+      "name": "jurew",
+      "level": 1,
+      "playerRace": "Elf",
+      "playerClass": "barbarian",
+      "playerBackground": "Acolyte",
+      "playerAlignment": "lawful-good",
+      "abilities": {
+        "strength": 3,
+        "constitution": 4,
+        "dexterity": null,
+        "intelligence": null,
+        "wisdom": null,
+        "charisma": null
+      }
+    },
+    {
+      "id": 4,
+      "name": "asgsaf",
+      "level": 1,
+      "playerRace": "Elf",
+      "playerClass": "barbarian",
+      "playerBackground": "Acolyte",
+      "playerAlignment": "lawful-good",
+      "abilities": {
+        "strength": 3,
+        "constitution": 4,
+        "dexterity": null,
+        "intelligence": null,
+        "wisdom": null,
+        "charisma": null
+      }
+    },
+    {
+      "id": 5,
+      "name": "vdcsx",
+      "level": null,
+      "playerRace": "Human",
+      "playerClass": "barbarian",
+      "playerBackground": "Acolyte",
+      "playerAlignment": "lawful-good",
+      "abilities": {
+        "strength": null,
+        "constitution": null,
+        "dexterity": null,
+        "intelligence": null,
+        "wisdom": null,
+        "charisma": null
+      }
+    },
+    {
+      "id": 6,
+      "name": "hiiii",
+      "level": 69,
+      "playerRace": "Human",
+      "playerClass": "barbarian",
+      "playerBackground": "Acolyte",
+      "playerAlignment": "lawful-good",
+      "abilities": {
+        "strength": null,
+        "constitution": null,
+        "dexterity": null,
+        "intelligence": null,
+        "wisdom": null,
+        "charisma": null
+      }
+    }
+  ]
 }

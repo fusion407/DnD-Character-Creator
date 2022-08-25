@@ -16,7 +16,65 @@ let int = 0;
 let wis = 0;
 let cha = 0;
 
+// character object
+const newCharacter = {
+    id : '',
+    name : '',
+    level : 0,
+    playerRace : '',
+    playerClass : '',
+    playerBackground : '',
+    playerAlignment : '',
+    abilities : {
+        strength : 0,
+        constitution : 0,
+        dexterity : 0,
+        intelligence : 0,
+        wisdom : 0,
+        charisma : 0
+    }
+}
+
+function fetchCharacterData() {
+    console.log("..... fetching character data")
+    const characterCard = document.querySelector('div.characterCards');
+    characterCard.innerHTML = '';
+    return fetch(`http://localhost:3000/characters`, {
+        method: 'GET',
+        headers: {
+            'Content-Type': 'application/json',
+            Accept: 'application/json'
+        }
+    }) 
+    .then(response => response.json())
+    .then(data => {
+        const base = data[0];
+        const abilityPoints = data.abilities;
+        if (base) {
+            for(let i=0;i<data.length;i++) {
+
+
+                const characterName = JSON.parse(JSON.stringify(data[i].name));
+                const characterClass = JSON.parse(JSON.stringify(data[i].playerClass))
+                const characterLevel = JSON.parse(JSON.stringify(parseInt(data[i].level)))
+                const characterRace = JSON.parse(JSON.stringify(data[i].playerRace))
+                const characterBackground = JSON.parse(JSON.stringify(data[i].playerBackground))
+                const characterAlignment = JSON.parse(JSON.stringify(data[i].playerAlignment))
+                const newCharacterCard = document.createElement('div');
+                newCharacterCard.setAttribute('class', 'newCharacterCard');
+
+                newCharacterCard.innerHTML = `<h2>${characterName} Lvl: ${characterLevel}</h2>
+                                              <h3>${characterRace} ${characterClass} ${characterBackground}</h3>`
+                characterCard.appendChild(newCharacterCard);
+            } 
+                
+        }
+    })
+}
+
 function setNewCharacterData() {
+    console.log('..... creating character')
+
     //name
     const name = document.querySelector('input#name').value
     console.log('name: ' + name)
@@ -44,26 +102,47 @@ function setNewCharacterData() {
     //abilities
     const strength = parseInt(document.querySelector('input#strength.action-points').value) + str;
     console.log('str: ' + strength);
-
     const constitution = parseInt(document.querySelector('input#constitution.action-points').value) + con;
     console.log('con: ' + constitution);
-
     const dexterity = parseInt(document.querySelector('input#dexterity.action-points').value) + dex;
     console.log('dex: ' + dexterity);
-
     const intelligence = parseInt(document.querySelector('input#intelligence.action-points').value) + int;
     console.log('int: ' + intelligence);
-
     const wisdom = parseInt(document.querySelector('input#wisdom.action-points').value) + wis;
     console.log('wis: ' + wisdom);
-
     const charisma = parseInt(document.querySelector('input#charisma.action-points').value) + cha;
     console.log('cha: ' + charisma);
 
-    //create object with above data
-    //pass into function that handles json server
-    //display new character screen and hide new character container
+    // assigning elements to character object
+    newCharacter.name = name;
+    newCharacter.level = level;
+    newCharacter.playerRace = playerRace;
+    newCharacter.playerClass = playerClass;
+    newCharacter.playerBackground = playerBackground
+    newCharacter.playerAlignment = playerAlignment;
+    newCharacter.abilities.strength = strength;
+    newCharacter.abilities.constitution = constitution;
+    newCharacter.abilities.dexterity = dexterity;
+    newCharacter.abilities.intelligence = intelligence;
+    newCharacter.abilities.wisdom = wisdom;
+    newCharacter.abilities.charisma = charisma;
+    console.log('character : ' + JSON.stringify(newCharacter))
+
+    // making post request sending newCharacter data to server
+    fetch(`http://localhost:3000/characters`, {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+            Accept: 'application/json'
+        },
+        body : JSON.stringify(newCharacter),
+    }) 
+    .then(response => response.json());
+
+
+    fetchCharacterData();
     //create character card which appends to new new character container
+    //reset html element values from the create new character container
 }
 
 function changeRaceDescription() {
@@ -84,7 +163,7 @@ function changeRaceDescription() {
         const bonuses = data.ability_bonuses
              // debug                            
         bonuses.forEach(element => 
-            console.log(
+            console.log('bonus: ' +
                 element.ability_score.index + ' ' +
                 element.bonus
         ));
@@ -181,6 +260,8 @@ document.addEventListener("DOMContentLoaded", () => {
     const newCharacterBtn = document.getElementById('new-character-button')
     const createCharacterBtn = document.querySelector('input.submit')
     
+    fetchCharacterData();
+
     // hides new character container and displays create character container
     newCharacterBtn.addEventListener('click', (e) => {
         e.preventDefault();
@@ -189,6 +270,7 @@ document.addEventListener("DOMContentLoaded", () => {
         changeRaceDescription();
         changeClassDescription();
         changeAlignmentDescription();
+
     })
     // create character button
     createCharacterBtn.addEventListener('click', (e) => {
@@ -208,6 +290,4 @@ document.addEventListener("DOMContentLoaded", () => {
     alignmentDropdown.addEventListener('change', (e) => {
         changeAlignmentDescription();
     })
-
-
 })
