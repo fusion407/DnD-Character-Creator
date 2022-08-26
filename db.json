@@ -2,121 +2,53 @@
   "characters": [
     {
       "id": 1,
-      "name": "irielou",
-      "level": 1,
+      "name": "Jon Snow",
+      "level": 46,
       "playerRace": "Human",
-      "playerClass": "barbarian",
-      "playerBackground": "Acolyte",
+      "playerClass": "fighter",
+      "playerBackground": "Soldier",
       "playerAlignment": "lawful-good",
       "abilities": {
-        "strength": null,
-        "constitution": null,
-        "dexterity": null,
-        "intelligence": null,
-        "wisdom": null,
-        "charisma": null
+        "strength": 7,
+        "constitution": 4,
+        "dexterity": 5,
+        "intelligence": 7,
+        "wisdom": 10,
+        "charisma": 8
       }
     },
     {
       "id": 2,
-      "name": "brady",
-      "level": 1,
-      "playerRace": "Elf",
-      "playerClass": "barbarian",
-      "playerBackground": "Acolyte",
-      "playerAlignment": "lawful-good",
+      "name": "Tyrion Lannister",
+      "level": 25,
+      "playerRace": "Dwarf",
+      "playerClass": "rogue",
+      "playerBackground": "Noble",
+      "playerAlignment": "neutral-good",
       "abilities": {
-        "strength": 3,
-        "constitution": 4,
-        "dexterity": null,
-        "intelligence": null,
-        "wisdom": null,
-        "charisma": null
+        "strength": 2,
+        "constitution": 5,
+        "dexterity": 4,
+        "intelligence": 2,
+        "wisdom": 4,
+        "charisma": 1
       }
     },
     {
       "id": 3,
-      "name": "jurew",
-      "level": 1,
-      "playerRace": "Elf",
-      "playerClass": "barbarian",
-      "playerBackground": "Acolyte",
-      "playerAlignment": "lawful-good",
-      "abilities": {
-        "strength": 3,
-        "constitution": 4,
-        "dexterity": null,
-        "intelligence": null,
-        "wisdom": null,
-        "charisma": null
-      }
-    },
-    {
-      "id": 4,
-      "name": "asgsaf",
-      "level": 1,
-      "playerRace": "Elf",
-      "playerClass": "barbarian",
-      "playerBackground": "Acolyte",
-      "playerAlignment": "lawful-good",
-      "abilities": {
-        "strength": 3,
-        "constitution": 4,
-        "dexterity": null,
-        "intelligence": null,
-        "wisdom": null,
-        "charisma": null
-      }
-    },
-    {
-      "id": 5,
-      "name": "vdcsx",
-      "level": null,
+      "name": "Gandalf the Grey",
+      "level": 83,
       "playerRace": "Human",
-      "playerClass": "barbarian",
-      "playerBackground": "Acolyte",
-      "playerAlignment": "lawful-good",
+      "playerClass": "wizard",
+      "playerBackground": "Outlander",
+      "playerAlignment": "neutral-good",
       "abilities": {
-        "strength": null,
-        "constitution": null,
-        "dexterity": null,
-        "intelligence": null,
-        "wisdom": null,
-        "charisma": null
-      }
-    },
-    {
-      "id": 6,
-      "name": "hiiii",
-      "level": 69,
-      "playerRace": "Human",
-      "playerClass": "barbarian",
-      "playerBackground": "Acolyte",
-      "playerAlignment": "lawful-good",
-      "abilities": {
-        "strength": null,
-        "constitution": null,
-        "dexterity": null,
-        "intelligence": null,
-        "wisdom": null,
-        "charisma": null
-      }
-    },
-    {
-      "id": 7,
-      "name": "fdsfs",
-      "level": null,
-      "playerRace": "Human",
-      "playerClass": "barbarian",
-      "playerBackground": "Acolyte",
-      "playerAlignment": "lawful-good",
-      "abilities": {
-        "strength": null,
-        "constitution": null,
-        "dexterity": null,
-        "intelligence": null,
-        "wisdom": null,
-        "charisma": null
+        "strength": 4,
+        "constitution": 7,
+        "dexterity": 4,
+        "intelligence": 11,
+        "wisdom": 11,
+        "charisma": 7
       }
     }
   ]

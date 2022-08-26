@@ -52,19 +52,33 @@ function fetchCharacterData() {
         const abilityPoints = data.abilities;
         if (base) {
             for(let i=0;i<data.length;i++) {
-
-
                 const characterName = JSON.parse(JSON.stringify(data[i].name));
                 const characterClass = JSON.parse(JSON.stringify(data[i].playerClass))
                 const characterLevel = JSON.parse(JSON.stringify(parseInt(data[i].level)))
                 const characterRace = JSON.parse(JSON.stringify(data[i].playerRace))
                 const characterBackground = JSON.parse(JSON.stringify(data[i].playerBackground))
                 const characterAlignment = JSON.parse(JSON.stringify(data[i].playerAlignment))
+                const strength = JSON.parse(JSON.stringify(data[i].abilities.strength))
+                const constitution = JSON.parse(JSON.stringify(data[i].abilities.constitution))
+                const dexterity = JSON.parse(JSON.stringify(data[i].abilities.dexterity))
+                const intelligence = JSON.parse(JSON.stringify(data[i].abilities.intelligence))
+                const wisdom = JSON.parse(JSON.stringify(data[i].abilities.wisdom))
+                const charisma = JSON.parse(JSON.stringify(data[i].abilities.charisma))
                 const newCharacterCard = document.createElement('div');
                 newCharacterCard.setAttribute('class', 'newCharacterCard');
 
-                newCharacterCard.innerHTML = `<h2>${characterName} Lvl: ${characterLevel}</h2>
-                                              <h3>${characterRace} ${characterClass} ${characterBackground}</h3>`
+                newCharacterCard.innerHTML = `<h2>${characterName}</h2>
+                                              <h2> Lvl: ${characterLevel}</h2>
+                                              <h3>${characterRace} - ${characterClass} - ${characterBackground}</h3>
+                                              <h3>${characterAlignment}</h3>
+                                              <div class="abilitiesOnCard">
+	                                            <div class="item item--1">Str: ${strength}</div>
+	                                            <div class="item item--2">Con: ${constitution}</div>
+	                                            <div class="item item--3">Dex: ${dexterity}</div>
+	                                            <div class="item item--4">Int: ${intelligence}</div>
+	                                            <div class="item item--5">Wis: ${wisdom}</div>
+	                                            <div class="item item--6">Cha: ${charisma}</div>
+                                              </div>`
                 characterCard.appendChild(newCharacterCard);
             } 
                 
