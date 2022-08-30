@@ -1,4 +1,4 @@
-Link to project page:
+Link to project page: (requires json server to save character data)
 https://fusion407.github.io/phase-1-project/
 
 Dungeons and Dragons 5th Edition API:
