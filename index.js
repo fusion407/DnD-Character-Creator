@@ -64,9 +64,10 @@ function fetchCharacterData() {
     .then(response => response.json())
     .then(data => {
         const base = data[0];
-        const abilityPoints = data.abilities;
+        // check if any data exists
         if (base) {
             for(let i=0;i<data.length;i++) {
+                // variables for each character card
                 const characterName = JSON.parse(JSON.stringify(data[i].name));
                 const characterClass = JSON.parse(JSON.stringify(data[i].playerClass))
                 const characterLevel = JSON.parse(JSON.stringify(parseInt(data[i].level)))
@@ -106,6 +107,7 @@ function fetchCharacterData() {
         const deleteCharacterBtn = document.querySelectorAll('button#delete-btn')
         const allCharacters = document.querySelectorAll('div.newCharacterCard')
 
+        // event listeners for delete buttons
         for(let i=0;i<allCharacters.length;i++){
             deleteCharacterBtn[i].addEventListener('click', (e) => {
                 e.preventDefault();
@@ -184,12 +186,22 @@ function setNewCharacterData() {
         body : JSON.stringify(newCharacter),
     }) 
     .then(response => response.json());
-
+    //reset html element values from the create new character container
+    newCharacter.name.value = '';
+    newCharacter.level.value = '';
+    newCharacter.playerRace.value = '';
+    newCharacter.playerClass.value = '';
+    newCharacter.playerBackground.value = '';
+    newCharacter.playerAlignment.value = '';
+    newCharacter.abilities.strength = strength;
+    newCharacter.abilities.constitution.value = '';
+    newCharacter.abilities.dexterity.value = '';
+    newCharacter.abilities.intelligence.value = '';
+    newCharacter.abilities.wisdom = wisdom;
+    newCharacter.abilities.charisma.value = '';
     fetchCharacterData();
 
-    
-    //create character card which appends to new new character container
-    //reset html element values from the create new character container
+
 }
 
 function changeRaceDescription() {
@@ -208,13 +220,13 @@ function changeRaceDescription() {
         const raceDescription = document.getElementById('race-description');
         raceDescription.innerHTML = ''
         const bonuses = data.ability_bonuses
-             // debug                            
+        // debug                            
         bonuses.forEach(element => 
             console.log('bonus: ' +
                 element.ability_score.index + ' ' +
                 element.bonus
         ));
-        // making sure bonus values reset
+        // bonus values reset
         str = 0;
         con = 0;
         dex = 0;
@@ -222,7 +234,6 @@ function changeRaceDescription() {
         wis = 0;
         cha = 0;
         // iterate through each ability score element then assigning it's value
-        // to a global variable
         bonuses.forEach(element => {
             if(element.ability_score.index === 'str') {
                 str = element.bonus;
@@ -300,6 +311,7 @@ function changeAlignmentDescription() {
     });
 }
 document.addEventListener("DOMContentLoaded", () => {
+
     // containers
     const newCharacterContainer = document.getElementsByClassName('new-character-container')
     const createCharacterContainer = document.getElementsByClassName('create-character-container')
@@ -308,7 +320,7 @@ document.addEventListener("DOMContentLoaded", () => {
     const newCharacterBtn = document.getElementById('new-character-button')
     const createCharacterBtn = document.querySelector('input.submit')
 
-    
+    // show whatever characters are in db.json, if any
     fetchCharacterData();
 
     // hides new character container and displays create character container
@@ -321,6 +333,7 @@ document.addEventListener("DOMContentLoaded", () => {
         changeAlignmentDescription();
 
     })
+
     // create character button
     createCharacterBtn.addEventListener('click', (e) => {
         e.preventDefault();
@@ -328,15 +341,6 @@ document.addEventListener("DOMContentLoaded", () => {
         newCharacterContainer[0].style.display = "flex";
         createCharacterContainer[0].style.display = 'none'
     })
-
-    // for (let i = 0; i <= allCharacters.length; i++) {
-    //     let button = deleteCharacterBtn[i];
-    //     console.log('delete called')
-    //     button[i].addEventListener ("click", function() {
-    //       console.log('it worked');
-    //       deleteCharacter(i);
-    //     });
-    //   }
 
     // dropdown event listeners
     raceDropdown.addEventListener('change', (e) => {
