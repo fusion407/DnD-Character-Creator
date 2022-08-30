@@ -35,6 +35,21 @@ const newCharacter = {
     }
 }
 
+
+function deleteCharacter(index) {
+    console.log("..... deleting character data")
+    return fetch(`http://localhost:3000/characters/${index}`, {
+        method: 'DELETE',
+        headers: {
+            'Content-Type': 'application/json',
+            Accept: 'application/json'
+        }
+    })
+    .then(response => response.json())
+    .then(data => {
+        fetchCharacterData();
+    })
+}
 function fetchCharacterData() {
     console.log("..... fetching character data")
     const characterCard = document.querySelector('div.characterCards');
@@ -65,8 +80,11 @@ function fetchCharacterData() {
                 const wisdom = JSON.parse(JSON.stringify(data[i].abilities.wisdom))
                 const charisma = JSON.parse(JSON.stringify(data[i].abilities.charisma))
                 const newCharacterCard = document.createElement('div');
+                const deleteButton = document.createElement('button')
                 newCharacterCard.setAttribute('class', 'newCharacterCard');
-
+                deleteButton.setAttribute('id', 'delete-btn')
+                deleteButton.setAttribute('class', `${i}`)
+                deleteButton.innerText = 'Delete';
                 newCharacterCard.innerHTML = `<h2>${characterName}</h2>
                                               <h2> Lvl: ${characterLevel}</h2>
                                               <h3>${characterRace} - ${characterClass} - ${characterBackground}</h3>
@@ -80,9 +98,23 @@ function fetchCharacterData() {
 	                                            <div class="item item--6">Cha: ${charisma}</div>
                                               </div>`
                 characterCard.appendChild(newCharacterCard);
+                newCharacterCard.appendChild(deleteButton)
+
             } 
                 
         }
+        const deleteCharacterBtn = document.querySelectorAll('button#delete-btn')
+        const allCharacters = document.querySelectorAll('div.newCharacterCard')
+
+        for(let i=0;i<allCharacters.length;i++){
+            deleteCharacterBtn[i].addEventListener('click', (e) => {
+                e.preventDefault();
+                const dataID = JSON.parse(JSON.stringify(data[i].id))
+                console.log("clicked delete button: "+ i)
+                deleteCharacter(dataID);
+            })
+        }
+
     })
 }
 
@@ -153,8 +185,9 @@ function setNewCharacterData() {
     }) 
     .then(response => response.json());
 
-
     fetchCharacterData();
+
+    
     //create character card which appends to new new character container
     //reset html element values from the create new character container
 }
@@ -220,7 +253,8 @@ function changeRaceDescription() {
                                     <li>Dexterity: +${dex}</li>
                                     <li>Intelligence: +${int}</li>
                                     <li>Wisdom: +${wis}</li>
-                                    <li>Charisma: +${cha}</li>`
+                                    <li>Charisma: +${cha}</li>
+                                    `
         desc.setAttribute('class', 'desc')
         raceDescription.appendChild(desc);
         desc.appendChild(abilityPoints)
@@ -273,6 +307,7 @@ document.addEventListener("DOMContentLoaded", () => {
     // buttons
     const newCharacterBtn = document.getElementById('new-character-button')
     const createCharacterBtn = document.querySelector('input.submit')
+
     
     fetchCharacterData();
 
@@ -293,6 +328,15 @@ document.addEventListener("DOMContentLoaded", () => {
         newCharacterContainer[0].style.display = "flex";
         createCharacterContainer[0].style.display = 'none'
     })
+
+    // for (let i = 0; i <= allCharacters.length; i++) {
+    //     let button = deleteCharacterBtn[i];
+    //     console.log('delete called')
+    //     button[i].addEventListener ("click", function() {
+    //       console.log('it worked');
+    //       deleteCharacter(i);
+    //     });
+    //   }
 
     // dropdown event listeners
     raceDropdown.addEventListener('change', (e) => {

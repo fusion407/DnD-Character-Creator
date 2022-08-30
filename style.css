@@ -106,7 +106,7 @@ input {
     background-color: rgb(171, 59, 55);
     color: black;
 }
-button {
+button#new-character-button {
     display: flex;
     position: fixed;
     font-family: 'Cinzel', serif;
@@ -125,7 +125,26 @@ button {
     border-radius: 10px;
     border-style:double;
 }
-button:hover {
+button#delete-btn {
+    position: relative;
+    font-family: 'Cinzel', serif;
+    height: 40px;
+    width: 120px;
+    justify-content: center;
+    text-align: center;
+    align-self: center;
+    font-size: large;
+    border: 3px solid black;
+    background-color: rgb(171, 59, 55);
+    border: solid;
+    border-radius: 10px;
+    border-style:double;
+    margin-bottom: 10px;
+}
+button#new-character-button:hover {
+    background-color: rgb(177, 83, 80);
+}
+button#delete-btn:hover {
     background-color: rgb(177, 83, 80);
 }
 select {
@@ -197,7 +216,6 @@ div.description p {
     row-gap: 30px;
     top: 27%;
     left: 43%;
-    pointer-events: none;
 }
 .newCharacterCard {
     border-style: solid;
