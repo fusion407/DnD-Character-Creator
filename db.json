@@ -1,40 +1,6 @@
 {
   "characters": [
     {
-      "id": 1,
-      "name": "Joey",
-      "level": 4,
-      "playerRace": "Human",
-      "playerClass": "rogue",
-      "playerBackground": "Hermit",
-      "playerAlignment": "lawful-evil",
-      "abilities": {
-        "strength": 3,
-        "constitution": 5,
-        "dexterity": 3,
-        "intelligence": 7,
-        "wisdom": 2,
-        "charisma": 3
-      }
-    },
-    {
-      "id": 3,
-      "name": "Gandalf",
-      "level": 10,
-      "playerRace": "Human",
-      "playerClass": "wizard",
-      "playerBackground": "Outlander",
-      "playerAlignment": "lawful-good",
-      "abilities": {
-        "strength": 5,
-        "constitution": 9,
-        "dexterity": 6,
-        "intelligence": 100,
-        "wisdom": 100,
-        "charisma": 7
-      }
-    },
-    {
       "id": 4,
       "name": "Tyrion Lanister",
       "level": 6,
@@ -49,23 +15,6 @@
         "intelligence": 80,
         "wisdom": 55,
         "charisma": 2
-      }
-    },
-    {
-      "id": 5,
-      "name": "Bill",
-      "level": 7,
-      "playerRace": "Gnome",
-      "playerClass": "sorcerer",
-      "playerBackground": "Hermit",
-      "playerAlignment": "chaotic-neutral",
-      "abilities": {
-        "strength": 6,
-        "constitution": 3,
-        "dexterity": 2,
-        "intelligence": 10,
-        "wisdom": 3,
-        "charisma": 6
       }
     },
     {

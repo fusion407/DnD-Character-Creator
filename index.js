@@ -1,3 +1,7 @@
+// containers
+const newCharacterContainer = document.getElementsByClassName('new-character-container')
+const createCharacterContainer = document.getElementsByClassName('create-character-container')
+
 // dropdowns
 const raceDropdown = document.querySelector('select#race')
 const alignmentDropdown = document.querySelector('select#alignment')
@@ -8,6 +12,10 @@ const backgroundDropdown = document.querySelector('select#background')
 const classDescription = document.getElementById('class-description')
 const backgroundDescription = document.getElementById('background-description')
 
+// buttons
+const newCharacterBtn = document.getElementById('new-character-button')
+const createCharacterBtn = document.querySelector('input.submit')
+
 // ability point bonuses
 let str = 0;
 let con = 0;
@@ -16,7 +24,7 @@ let int = 0;
 let wis = 0;
 let cha = 0;
 
-// character object
+// new character object
 const newCharacter = {
     id : '',
     name : '',
@@ -36,6 +44,7 @@ const newCharacter = {
 }
 
 
+// selected character is removed from the database and invokes fetchCharacterData()
 function deleteCharacter(index) {
     console.log("..... deleting character data")
     return fetch(`http://localhost:3000/characters/${index}`, {
@@ -50,6 +59,9 @@ function deleteCharacter(index) {
         fetchCharacterData();
     })
 }
+
+
+// on DOM load, and create/delete character click, GET request is made to server and returns existing character data, if any
 function fetchCharacterData() {
     console.log("..... fetching character data")
     const characterCard = document.querySelector('div.characterCards');
@@ -64,10 +76,8 @@ function fetchCharacterData() {
     .then(response => response.json())
     .then(data => {
         const base = data[0];
-        // check if any data exists
         if (base) {
             for(let i=0;i<data.length;i++) {
-                // variables for each character card
                 const characterName = JSON.parse(JSON.stringify(data[i].name));
                 const characterClass = JSON.parse(JSON.stringify(data[i].playerClass))
                 const characterLevel = JSON.parse(JSON.stringify(parseInt(data[i].level)))
@@ -104,10 +114,10 @@ function fetchCharacterData() {
             } 
                 
         }
-        const deleteCharacterBtn = document.querySelectorAll('button#delete-btn')
-        const allCharacters = document.querySelectorAll('div.newCharacterCard')
 
         // event listeners for delete buttons
+        const deleteCharacterBtn = document.querySelectorAll('button#delete-btn')
+        const allCharacters = document.querySelectorAll('div.newCharacterCard')
         for(let i=0;i<allCharacters.length;i++){
             deleteCharacterBtn[i].addEventListener('click', (e) => {
                 e.preventDefault();
@@ -115,11 +125,15 @@ function fetchCharacterData() {
                 console.log("clicked delete button: "+ i)
                 deleteCharacter(dataID);
             })
+            deleteCharacterBtn[i].addEventListener("mouseover", setHoverColor);
+            deleteCharacterBtn[i].addEventListener("mouseout", setNormalColor);
         }
 
     })
 }
 
+
+// on create character click, POST request is made which inputs each value on the form
 function setNewCharacterData() {
     console.log('..... creating character')
 
@@ -186,24 +200,14 @@ function setNewCharacterData() {
         body : JSON.stringify(newCharacter),
     }) 
     .then(response => response.json());
-    //reset html element values from the create new character container
-    newCharacter.name.value = '';
-    newCharacter.level.value = '';
-    newCharacter.playerRace.value = '';
-    newCharacter.playerClass.value = '';
-    newCharacter.playerBackground.value = '';
-    newCharacter.playerAlignment.value = '';
-    newCharacter.abilities.strength = strength;
-    newCharacter.abilities.constitution.value = '';
-    newCharacter.abilities.dexterity.value = '';
-    newCharacter.abilities.intelligence.value = '';
-    newCharacter.abilities.wisdom = wisdom;
-    newCharacter.abilities.charisma.value = '';
+
     fetchCharacterData();
 
 
 }
 
+
+// dropdown onchange fetches description on races languages and ability bonuses
 function changeRaceDescription() {
     console.log("called race description function")
     fetch(`https://www.dnd5eapi.co/api/races/${raceDropdown.value.toLowerCase()}`, {
@@ -272,6 +276,9 @@ function changeRaceDescription() {
 
     });
 }
+
+
+// dropdown on changes displays class title and hit die
 function changeClassDescription() {
     console.log("called class description function")
     fetch(`https://www.dnd5eapi.co/api/classes/${classDropdown.value}`, {
@@ -291,6 +298,8 @@ function changeClassDescription() {
     });
 }
 
+
+// dropdown on changes fetches data for alignment description
 function changeAlignmentDescription() {
     console.log("called alignment description function")
     fetch(`https://www.dnd5eapi.co/api/alignments/${alignmentDropdown.value}`, {
@@ -310,20 +319,37 @@ function changeAlignmentDescription() {
     
     });
 }
+
+// changes button color on mouse over and resets on mouse out
+function setHoverColor() {
+    this.style.background = "rgb(200, 100, 73)";
+}
+ 
+function setNormalColor() {
+    this.style.background = "";
+}
+
 document.addEventListener("DOMContentLoaded", () => {
 
-    // containers
-    const newCharacterContainer = document.getElementsByClassName('new-character-container')
-    const createCharacterContainer = document.getElementsByClassName('create-character-container')
-
-    // buttons
-    const newCharacterBtn = document.getElementById('new-character-button')
-    const createCharacterBtn = document.querySelector('input.submit')
-
-    // show whatever characters are in db.json, if any
+    // Fetch any existing character object in db.json and append card to page
     fetchCharacterData();
 
-    // hides new character container and displays create character container
+
+    //button 'mouseover' 'mouseout' event listeners
+    newCharacterBtn.addEventListener("mouseover", setHoverColor);
+    newCharacterBtn.addEventListener("mouseout", setNormalColor);
+    createCharacterBtn.addEventListener("mouseover", setHoverColor);
+    createCharacterBtn.addEventListener("mouseout", setNormalColor);
+
+
+    // button 'click' event listeners
+    createCharacterBtn.addEventListener('click', (e) => {
+        e.preventDefault();
+        console.log('oogabooga')
+        setNewCharacterData();
+        newCharacterContainer[0].style.display = "flex";
+        createCharacterContainer[0].style.display = 'none'
+    })
     newCharacterBtn.addEventListener('click', (e) => {
         e.preventDefault();
         newCharacterContainer[0].style.display = "none";
@@ -334,15 +360,8 @@ document.addEventListener("DOMContentLoaded", () => {
 
     })
 
-    // create character button
-    createCharacterBtn.addEventListener('click', (e) => {
-        e.preventDefault();
-        setNewCharacterData();
-        newCharacterContainer[0].style.display = "flex";
-        createCharacterContainer[0].style.display = 'none'
-    })
 
-    // dropdown event listeners
+    // dropdown 'change' event listeners
     raceDropdown.addEventListener('change', (e) => {
         changeRaceDescription();
     })

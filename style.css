@@ -142,7 +142,7 @@ button#delete-btn {
     margin-bottom: 10px;
 }
 button#new-character-button:hover {
-    background-color: rgb(177, 83, 80);
+    background-color: rgb(160, 71, 44);
 }
 button#delete-btn:hover {
     background-color: rgb(177, 83, 80);
@@ -163,9 +163,7 @@ select {
     border-style:double;
     font-family: 'Cinzel', serif;
 }
-.submit:hover {
-    background-color: rgb(177, 83, 80);
-}
+
 div.description-container {
     display: flex;
     width: 40%;
@@ -224,16 +222,15 @@ div.description p {
 .newCharacterCard h3 {
     font-weight: lighter;
 }
-.abilitiesOnCard {
+div.abilitiesOnCard {
     background-color: rgb(171, 59, 55);
-	width: 10%;
-	margin: 30px auto;
-	margin-left: 70px;
-    align-self: center;
+    justify-content: center;
+	width: auto;
+    margin-bottom: 15px;
+    align-content: center;
 	display: grid;
 	grid-template-rows: 50px 50px;
 	grid-template-columns: 50px 50px 50px;
-	
 	grid-row-gap: 10px;
 	grid-column-gap: 10px;
 	grid-gap: 10px;
@@ -326,11 +323,13 @@ div.description p {
     .abilitiesOnCard {
         width: auto;
     }
+    button#new-character-button {
+        transform: translateX(-50px);
+    }
     
 }
 @media screen and (max-width: 1000px) {
     div.image {
-        display: none;
         left: 1%;
         top: 20%;
     }
@@ -349,5 +348,8 @@ div.description p {
     }
     .abilitiesOnCard {
         width: auto;
+    }
+    button#new-character-button {
+        transform: translateX(-50px);
     }
 }
