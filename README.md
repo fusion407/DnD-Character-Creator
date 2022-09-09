@@ -7,7 +7,7 @@ In order to use this app, you must run json server on db.json.
 
 $ json-server --watch db.json
 
-Then just open index.html, click New Character then you're good to create your character.
+Then just open index.html or use my link below for the project page, click New Character then you're good to create your character.
 
 Once a character is created, the data gets saved into your database and a card will be appended to the character screen. The user may delete any character, an edit button will be implemented in the future.
 
