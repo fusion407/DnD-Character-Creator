@@ -1,37 +1,37 @@
 {
   "characters": [
     {
-      "id": 4,
-      "name": "Tyrion Lanister",
-      "level": 6,
-      "playerRace": "Dwarf",
-      "playerClass": "rogue",
-      "playerBackground": "Noble",
-      "playerAlignment": "neutral-good",
+      "id": 6,
+      "name": "harry",
+      "level": 1,
+      "playerRace": "Human",
+      "playerClass": "wizard",
+      "playerBackground": "Acolyte",
+      "playerAlignment": "lawful-good",
       "abilities": {
-        "strength": 1,
-        "constitution": 3,
-        "dexterity": 6,
-        "intelligence": 80,
-        "wisdom": 55,
-        "charisma": 2
+        "strength": 4,
+        "constitution": 4,
+        "dexterity": 3,
+        "intelligence": 7,
+        "wisdom": 6,
+        "charisma": 6
       }
     },
     {
-      "id": 6,
-      "name": "Jon Snow",
-      "level": 4,
+      "id": 8,
+      "name": "hermione",
+      "level": 1,
       "playerRace": "Human",
-      "playerClass": "fighter",
-      "playerBackground": "Soldier",
+      "playerClass": "wizard",
+      "playerBackground": "Acolyte",
       "playerAlignment": "lawful-good",
       "abilities": {
-        "strength": 5,
-        "constitution": 3,
-        "dexterity": 8,
-        "intelligence": 4,
-        "wisdom": 23,
-        "charisma": 5
+        "strength": 4,
+        "constitution": 4,
+        "dexterity": 3,
+        "intelligence": 7,
+        "wisdom": 6,
+        "charisma": 6
       }
     }
   ]

@@ -1,3 +1,21 @@
+// ------------
+// Quick notes on async/promises and JavaScripts fetch API.
+// Whenever JavaScript uses fetch in order to pull data from an external API, it makes
+// what is called a promise, which is what represents the state of completion or failure
+// within an asynchronous function. JavaScript is a synchronous language, which means
+// the language only reads only one line at a time. To get around this async functions
+// are used, such as fetch, which passes the code into the browser where the code 
+// awaits one of its promised states while JavaScript continues to run.
+// Using async functions is useful when so the page doesn't have to freeze and wait
+// between each function call that requires a significant amount of time to run.
+
+// Basically, fetch() is a JavaScript native webAPI that is asynchronous and will return data
+// in the form of a promise. Fetch uses a response object which holds the data returned from
+// whatever API you're calling, then sends a request which returns a promise. When that request
+// is complete it's resolved to the response object, if the request fails, the promise
+// is 'rejected'.
+// ------------
+
 // containers
 const newCharacterContainer = document.getElementsByClassName('new-character-container')
 const createCharacterContainer = document.getElementsByClassName('create-character-container')
@@ -44,28 +62,98 @@ const newCharacter = {
 }
 
 
-// selected character is removed from the database and invokes fetchCharacterData()
-function deleteCharacter(index) {
+// Refactored:
+// Any function using fetch() was seperated into it's own function from the rest of the logic.
+// Each one of those functions is returning a promise, so they are made asynchronous (by adding
+// async to the beginning of each function declaration). The purpose of this is to make the 
+// code much easier to read, and to use.
+
+
+// selected character is removed from json-server
+// Refactored:
+// the fetchCharacterData() is now invoked after the fetch call
+async function deleteCharacter(index) {
     console.log("..... deleting character data")
-    return fetch(`http://localhost:3000/characters/${index}`, {
+    fetch(`http://localhost:3000/characters/${index}`, {
         method: 'DELETE',
         headers: {
             'Content-Type': 'application/json',
             Accept: 'application/json'
         }
     })
-    .then(response => response.json())
-    .then(data => {
-        fetchCharacterData();
-    })
+    // refetches character data once an item has been deleted off json-server
+    fetchCharacterData();
 }
 
-
-// on DOM load, and create/delete character click, GET request is made to server and returns existing character data, if any
-function fetchCharacterData() {
-    console.log("..... fetching character data")
+// Refactored:
+// This new function serves the purpose of taking in json data
+// then creating elements in the DOM which is appended to the character screen
+// that displays a card for each character that exists
+function createCharacterData(data) {
     const characterCard = document.querySelector('div.characterCards');
     characterCard.innerHTML = '';
+    // check if data exists
+    if(data[0]){
+        // if so iterate through each data object
+        // create new variables and assign to parsed value of data
+        data.forEach(data => {
+            const characterName = JSON.parse(JSON.stringify(data.name));
+            const characterClass = JSON.parse(JSON.stringify(data.playerClass))
+            const characterLevel = JSON.parse(JSON.stringify(parseInt(data.level)))
+            const characterRace = JSON.parse(JSON.stringify(data.playerRace))
+            const characterBackground = JSON.parse(JSON.stringify(data.playerBackground))
+            const characterAlignment = JSON.parse(JSON.stringify(data.playerAlignment))
+            const strength = JSON.parse(JSON.stringify(data.abilities.strength))
+            const constitution = JSON.parse(JSON.stringify(data.abilities.constitution))
+            const dexterity = JSON.parse(JSON.stringify(data.abilities.dexterity))
+            const intelligence = JSON.parse(JSON.stringify(data.abilities.intelligence))
+            const wisdom = JSON.parse(JSON.stringify(data.abilities.wisdom))
+            const charisma = JSON.parse(JSON.stringify(data.abilities.charisma))
+
+            // create the character card with delete buttons
+            const newCharacterCard = document.createElement('div');
+            const deleteButton = document.createElement('button')
+
+            // set attributes of card/buttons and append to the DOM
+            newCharacterCard.setAttribute('class', 'newCharacterCard');
+            deleteButton.setAttribute('id', 'delete-btn')
+            deleteButton.setAttribute('class', data.id)
+            deleteButton.innerText = 'Delete';
+            newCharacterCard.innerHTML = `<h2>${characterName}</h2>
+                                          <h2> Lvl: ${characterLevel}</h2>
+                                          <h3>${characterRace} - ${characterClass} - ${characterBackground}</h3>
+                                          <h3>${characterAlignment}</h3>
+                                          <div class="abilitiesOnCard">
+                                            <div class="item item--1">Str: ${strength}</div>
+                                            <div class="item item--2">Con: ${constitution}</div>
+                                            <div class="item item--3">Dex: ${dexterity}</div>
+                                            <div class="item item--4">Int: ${intelligence}</div>
+                                            <div class="item item--5">Wis: ${wisdom}</div>
+                                            <div class="item item--6">Cha: ${charisma}</div>
+                                          </div>`
+            characterCard.appendChild(newCharacterCard);
+            newCharacterCard.appendChild(deleteButton) 
+        })
+    }
+
+    // delete buttons event listeners
+    const deleteCharacterBtn = document.querySelectorAll('button#delete-btn')
+    const allCharacters = document.querySelectorAll('div.newCharacterCard')
+    for(let i=0;i<allCharacters.length;i++){
+        deleteCharacterBtn[i].addEventListener('click', (e) => {
+            e.preventDefault();
+            deleteCharacter(data[i].id);
+        })
+        deleteCharacterBtn[i].addEventListener("mouseover", setHoverColor);
+        deleteCharacterBtn[i].addEventListener("mouseout", setNormalColor);
+    }
+}
+// Refactored:
+// Simply makes a promise, when resolved, it fetches existing character data from json-server
+// then passes that data into a new function which handles the logic used to assign
+// values into each key of the newCharacter object
+async function fetchCharacterData() {
+    console.log("..... fetching character data")
     return fetch(`http://localhost:3000/characters`, {
         method: 'GET',
         headers: {
@@ -75,92 +163,57 @@ function fetchCharacterData() {
     }) 
     .then(response => response.json())
     .then(data => {
-        const base = data[0];
-        if (base) {
-            for(let i=0;i<data.length;i++) {
-                const characterName = JSON.parse(JSON.stringify(data[i].name));
-                const characterClass = JSON.parse(JSON.stringify(data[i].playerClass))
-                const characterLevel = JSON.parse(JSON.stringify(parseInt(data[i].level)))
-                const characterRace = JSON.parse(JSON.stringify(data[i].playerRace))
-                const characterBackground = JSON.parse(JSON.stringify(data[i].playerBackground))
-                const characterAlignment = JSON.parse(JSON.stringify(data[i].playerAlignment))
-                const strength = JSON.parse(JSON.stringify(data[i].abilities.strength))
-                const constitution = JSON.parse(JSON.stringify(data[i].abilities.constitution))
-                const dexterity = JSON.parse(JSON.stringify(data[i].abilities.dexterity))
-                const intelligence = JSON.parse(JSON.stringify(data[i].abilities.intelligence))
-                const wisdom = JSON.parse(JSON.stringify(data[i].abilities.wisdom))
-                const charisma = JSON.parse(JSON.stringify(data[i].abilities.charisma))
-                const newCharacterCard = document.createElement('div');
-                const deleteButton = document.createElement('button')
-                newCharacterCard.setAttribute('class', 'newCharacterCard');
-                deleteButton.setAttribute('id', 'delete-btn')
-                deleteButton.setAttribute('class', `${i}`)
-                deleteButton.innerText = 'Delete';
-                newCharacterCard.innerHTML = `<h2>${characterName}</h2>
-                                              <h2> Lvl: ${characterLevel}</h2>
-                                              <h3>${characterRace} - ${characterClass} - ${characterBackground}</h3>
-                                              <h3>${characterAlignment}</h3>
-                                              <div class="abilitiesOnCard">
-	                                            <div class="item item--1">Str: ${strength}</div>
-	                                            <div class="item item--2">Con: ${constitution}</div>
-	                                            <div class="item item--3">Dex: ${dexterity}</div>
-	                                            <div class="item item--4">Int: ${intelligence}</div>
-	                                            <div class="item item--5">Wis: ${wisdom}</div>
-	                                            <div class="item item--6">Cha: ${charisma}</div>
-                                              </div>`
-                characterCard.appendChild(newCharacterCard);
-                newCharacterCard.appendChild(deleteButton)
-
-            } 
-                
+        if(data) {
+            createCharacterData(data)
         }
-
-        // event listeners for delete buttons
-        const deleteCharacterBtn = document.querySelectorAll('button#delete-btn')
-        const allCharacters = document.querySelectorAll('div.newCharacterCard')
-        for(let i=0;i<allCharacters.length;i++){
-            deleteCharacterBtn[i].addEventListener('click', (e) => {
-                e.preventDefault();
-                const dataID = JSON.parse(JSON.stringify(data[i].id))
-                console.log("clicked delete button: "+ i)
-                deleteCharacter(dataID);
-            })
-            deleteCharacterBtn[i].addEventListener("mouseover", setHoverColor);
-            deleteCharacterBtn[i].addEventListener("mouseout", setNormalColor);
-        }
-
     })
 }
 
 
-// on create character click, POST request is made which inputs each value on the form
+// Refactored:
+// This function was created to be seperated from the function that assigns
+// all new values to the newCharacter object
+// An object is called into this function, then POST request is made
+// sending the value of the object into json-server
+async function sendNewCharacterData(character) {
+    fetch(`http://localhost:3000/characters`, {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+            Accept: 'application/json'
+        },
+        body : JSON.stringify(character),
+    }) 
+    // response.json() reads the promise to completion
+    // which returns the result of parsing the body text
+    // as JSON
+    .then(response => response.json());
+}
+
+// Refactored:
+// the logic containing POST request is cut and pasted into its own function
+// that function is invoked in this function with the newCharacter object being
+// passed into it as an argument
 function setNewCharacterData() {
     console.log('..... creating character')
-
     //name
     const name = document.querySelector('input#name').value
     console.log('name: ' + name)
-
     //level
     const level = parseInt(document.querySelector('input#level').value);
     console.log('level: ' + level)
-    
     //class
     const playerRace = document.querySelector('select#race').value;
     console.log('race: ' + playerRace)
-
     //background
     const playerClass = document.querySelector('select#class').value;
     console.log('class: ' + playerClass)
-
     //background
     const playerBackground = document.querySelector('select#background').value;
     console.log('background: ' + playerBackground)
-
     //alignment
     const playerAlignment = document.querySelector('select#alignment').value;
     console.log('alignment: ' + playerAlignment)
-
     //abilities
     const strength = parseInt(document.querySelector('input#strength.action-points').value) + str;
     console.log('str: ' + strength);
@@ -174,8 +227,7 @@ function setNewCharacterData() {
     console.log('wis: ' + wisdom);
     const charisma = parseInt(document.querySelector('input#charisma.action-points').value) + cha;
     console.log('cha: ' + charisma);
-
-    // assigning elements to character object
+    // assigning elements to new character object
     newCharacter.name = name;
     newCharacter.level = level;
     newCharacter.playerRace = playerRace;
@@ -190,117 +242,103 @@ function setNewCharacterData() {
     newCharacter.abilities.charisma = charisma;
     console.log('character : ' + JSON.stringify(newCharacter))
 
-    // making post request sending newCharacter data to server
-    fetch(`http://localhost:3000/characters`, {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json',
-            Accept: 'application/json'
-        },
-        body : JSON.stringify(newCharacter),
-    }) 
-    .then(response => response.json());
+    // POST request sends newCharacter data to server
+    sendNewCharacterData(newCharacter);
 
+    // refetch the new set of data that was just created
     fetchCharacterData();
-
-
 }
 
 
-// dropdown onchange fetches description on races languages and ability bonuses
-function changeRaceDescription() {
-    console.log("called race description function")
-    fetch(`https://www.dnd5eapi.co/api/races/${raceDropdown.value.toLowerCase()}`, {
-        method: 'GET',
-        headers: {
-            'Content-Type': 'application/json',
-            Accept: 'application/json'
+
+
+// Refactored:
+// Each description function (changeRaceDescription, changeClassDescription, changeAlignmentDescription)
+// I have seperated by fetch call and DOM manipulation 
+// The functions that handle the fetch calls will return a promise
+// once resolved, the returning data is called into a new function that appends data for the
+// character race/class/alignment descriptions
+
+// these functions are invoked by the async functions below
+// the promised data is passed into these functions as arguments
+// and will create DOM elements that will display useful descriptions
+// in order to help the user make choices based off what's appended
+// on the character creator screen
+function createRaceDescription(data) {
+    const desc = document.createElement('div')
+    const abilityPoints = document.createElement('div')
+    const raceDescription = document.getElementById('race-description');
+    raceDescription.innerHTML = ''
+    const bonuses = data.ability_bonuses                        
+    bonuses.forEach(element => 
+        console.log('bonus: ' +
+            element.ability_score.index + ' ' +
+            element.bonus
+    ));
+    // bonus values reset
+    str = 0;
+    con = 0;
+    dex = 0;
+    int = 0;
+    wis = 0;
+    cha = 0;
+    // iterate through each ability score element then assigning it's value
+    bonuses.forEach(element => {
+        if(element.ability_score.index === 'str') {
+            str = element.bonus;
         }
-    }) 
-    .then(response => response.json())
-    .then(data => {
-        const desc = document.createElement('div')
-        const abilityPoints = document.createElement('div')
-        const raceDescription = document.getElementById('race-description');
-        raceDescription.innerHTML = ''
-        const bonuses = data.ability_bonuses
-        // debug                            
-        bonuses.forEach(element => 
-            console.log('bonus: ' +
-                element.ability_score.index + ' ' +
-                element.bonus
-        ));
-        // bonus values reset
-        str = 0;
-        con = 0;
-        dex = 0;
-        int = 0;
-        wis = 0;
-        cha = 0;
-        // iterate through each ability score element then assigning it's value
-        bonuses.forEach(element => {
-            if(element.ability_score.index === 'str') {
-                str = element.bonus;
-            }
-            if(element.ability_score.index === 'con') {
-                con = element.bonus;
-            }
-            if(element.ability_score.index === 'dex') {
-                dex = element.bonus;
-            }
-            if(element.ability_score.index === 'int') {
-                int = element.bonus;
-            }
-            if(element.ability_score.index === 'wis') {
-                wis = element.bonus;
-            }
-            if(element.ability_score.index === 'cha') {
-                cha = element.bonus;
-            }
-        });              
+        if(element.ability_score.index === 'con') {
+            con = element.bonus;
+        }
+        if(element.ability_score.index === 'dex') {
+            dex = element.bonus;
+        }
+        if(element.ability_score.index === 'int') {
+            int = element.bonus;
+        }
+        if(element.ability_score.index === 'wis') {
+            wis = element.bonus;
+        }
+        if(element.ability_score.index === 'cha') {
+            cha = element.bonus;
+        }
+    });              
 
-        desc.innerHTML = `<h2>${data.name}</h2>
-                          <p>Speed: ${data.speed}</p>
-                          <p>Languages: ${data.language_desc}</p>`;
-        abilityPoints.innerHTML = `<p>Racial Bonuses:</p>
-                                    <li>Strength: +${str}</li>
-                                    <li>Constitution: +${con}</li>
-                                    <li>Dexterity: +${dex}</li>
-                                    <li>Intelligence: +${int}</li>
-                                    <li>Wisdom: +${wis}</li>
-                                    <li>Charisma: +${cha}</li>
-                                    `
-        desc.setAttribute('class', 'desc')
-        raceDescription.appendChild(desc);
-        desc.appendChild(abilityPoints)
+    desc.innerHTML = `<h2>${data.name}</h2>
+                      <p>Speed: ${data.speed}</p>
+                      <p>Languages: ${data.language_desc}</p>`;
+    abilityPoints.innerHTML = `<p>Racial Bonuses:</p>
+                                <li>Strength: +${str}</li>
+                                <li>Constitution: +${con}</li>
+                                <li>Dexterity: +${dex}</li>
+                                <li>Intelligence: +${int}</li>
+                                <li>Wisdom: +${wis}</li>
+                                <li>Charisma: +${cha}</li>
+                                `
+    desc.setAttribute('class', 'desc')
+    raceDescription.appendChild(desc);
+    desc.appendChild(abilityPoints)
 
-    });
 }
-
-
-// dropdown on changes displays class title and hit die
-function changeClassDescription() {
-    console.log("called class description function")
-    fetch(`https://www.dnd5eapi.co/api/classes/${classDropdown.value}`, {
-        method: 'GET',
-        headers: {
-            'Content-Type': 'application/json',
-            Accept: 'application/json'
-        }
-    }) 
-    .then(response => response.json())
-    .then(data => {
-        const classDescription = document.getElementById('class-description');
-        classDescription.innerHTML = `<div class="desc">
+function createClassDescription(data) {
+    const classDescription = document.getElementById('class-description');
+    classDescription.innerHTML = `<div class="desc">
+                                    <h2>${data.name}</h2>
+                                    <p>Hit Die: ${data.hit_die}</p>
+                                 </div>`;
+}
+function createAlignmentDescription(data) {
+    const alignmentDescription = document.getElementById('alignment-description');
+    alignmentDescription.innerHTML = `<div class="desc">
                                         <h2>${data.name}</h2>
-                                        <p>Hit Die: ${data.hit_die}</p>
-                                     </div>`;
-    });
+                                        <p>Alignment: ${data.desc}</p>
+                                      </div>`;
 }
 
-
-// dropdown on changes fetches data for alignment description
-function changeAlignmentDescription() {
+// these async functions fetch data from the dnd5api
+// resolved data is passed into functions that are
+// used to manipulate the DOM
+async function fetchAlignmentDescription() {
     console.log("called alignment description function")
     fetch(`https://www.dnd5eapi.co/api/alignments/${alignmentDropdown.value}`, {
         method: 'GET',
@@ -311,12 +349,35 @@ function changeAlignmentDescription() {
     }) 
     .then(response => response.json())
     .then(data => {
-        const alignmentDescription = document.getElementById('alignment-description');
-        alignmentDescription.innerHTML = `<div class="desc">
-                                            <h2>${data.name}</h2>
-                                            <p>Alignment: ${data.desc}</p>
-                                          </div>`;
-    
+        createAlignmentDescription(data);
+    });
+}
+async function fetchClassDescription() {
+    console.log("called class description function")
+    fetch(`https://www.dnd5eapi.co/api/classes/${classDropdown.value}`, {
+        method: 'GET',
+        headers: {
+            'Content-Type': 'application/json',
+            Accept: 'application/json'
+        }
+    }) 
+    .then(response => response.json())
+    .then(data => {
+        createClassDescription(data);
+    });
+}
+async function fetchRaceDescription() {
+    console.log("called race description function")
+    fetch(`https://www.dnd5eapi.co/api/races/${raceDropdown.value.toLowerCase()}`, {
+        method: 'GET',
+        headers: {
+            'Content-Type': 'application/json',
+            Accept: 'application/json'
+        }
+    }) 
+    .then(response => response.json())
+    .then(data => {
+        createRaceDescription(data);
     });
 }
 
@@ -324,14 +385,14 @@ function changeAlignmentDescription() {
 function setHoverColor() {
     this.style.background = "rgb(200, 100, 73)";
 }
- 
 function setNormalColor() {
     this.style.background = "";
 }
 
+// on document load
 document.addEventListener("DOMContentLoaded", () => {
 
-    // Fetch any existing character object in db.json and append card to page
+    // fetches any existing character data from my json-server
     fetchCharacterData();
 
 
@@ -341,11 +402,9 @@ document.addEventListener("DOMContentLoaded", () => {
     createCharacterBtn.addEventListener("mouseover", setHoverColor);
     createCharacterBtn.addEventListener("mouseout", setNormalColor);
 
-
     // button 'click' event listeners
     createCharacterBtn.addEventListener('click', (e) => {
         e.preventDefault();
-        console.log('oogabooga')
         setNewCharacterData();
         newCharacterContainer[0].style.display = "flex";
         createCharacterContainer[0].style.display = 'none'
@@ -354,21 +413,21 @@ document.addEventListener("DOMContentLoaded", () => {
         e.preventDefault();
         newCharacterContainer[0].style.display = "none";
         createCharacterContainer[0].style.display = 'flex'
-        changeRaceDescription();
-        changeClassDescription();
-        changeAlignmentDescription();
+        fetchRaceDescription();
+        fetchClassDescription();
+        fetchAlignmentDescription();
 
     })
-
 
     // dropdown 'change' event listeners
+    // calls functions which fetches data from the dnd5api
     raceDropdown.addEventListener('change', (e) => {
-        changeRaceDescription();
+        fetchRaceDescription();
     })
     classDropdown.addEventListener('change', (e) => {
-        changeClassDescription();
+        fetchClassDescription();
     })
     alignmentDropdown.addEventListener('change', (e) => {
-        changeAlignmentDescription();
+        fetchAlignmentDescription();
     })
 })
