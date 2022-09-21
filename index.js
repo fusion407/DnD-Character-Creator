@@ -2,16 +2,15 @@
 // Quick notes on async/promises and JavaScripts fetch API.
 // Whenever JavaScript uses fetch in order to pull data from an external API, it makes
 // what is called a promise, which is what represents the state of completion or failure
-// within an asynchronous function. JavaScript is a synchronous language, which means
+// within an asynchronous operation. JavaScript is a synchronous language, which means
 // the language only reads only one line at a time. To get around this async functions
 // are used, such as fetch, which passes the code into the browser where the code 
 // awaits one of its promised states while JavaScript continues to run.
-// Using async functions is useful when so the page doesn't have to freeze and wait
-// between each function call that requires a significant amount of time to run.
+// Using async functions is useful when so the page wont freeze and wait when loading contents on the page
 
 // Basically, fetch() is a JavaScript native webAPI that is asynchronous and will return data
 // in the form of a promise. Fetch uses a response object which holds the data returned from
-// whatever API you're calling, then sends a request which returns a promise. When that request
+// the API you're calling, then sends a request which returns a promise. When that request
 // is complete it's resolved to the response object, if the request fails, the promise
 // is 'rejected'.
 // ------------
@@ -61,15 +60,14 @@ const newCharacter = {
     }
 }
 
-
+// ------------
 // Refactored:
-// Any function using fetch() was seperated into it's own function from the rest of the logic.
-// Each one of those functions is returning a promise, so they are made asynchronous (by adding
-// async to the beginning of each function declaration). The purpose of this is to make the 
-// code much easier to read, and to use.
+// Any function using fetch() was given a async declaration because they're all returning promises
+// The logic being made in each fetch request was mitigated into in own callback function and passing
+// the data from the returned promise as an argument.
+// ------------
 
-
-// selected character is removed from json-server
+// ------------
 // Refactored:
 // the fetchCharacterData() is now invoked after the fetch call
 async function deleteCharacter(index) {
@@ -84,7 +82,10 @@ async function deleteCharacter(index) {
     // refetches character data once an item has been deleted off json-server
     fetchCharacterData();
 }
+// ------------
 
+
+// ------------
 // Refactored:
 // This new function serves the purpose of taking in json data
 // then creating elements in the DOM which is appended to the character screen
@@ -148,8 +149,7 @@ function createCharacterData(data) {
         deleteCharacterBtn[i].addEventListener("mouseout", setNormalColor);
     }
 }
-// Refactored:
-// Simply makes a promise, when resolved, it fetches existing character data from json-server
+// makes a promise, when resolved, it fetches existing character data from json-server
 // then passes that data into a new function which handles the logic used to assign
 // values into each key of the newCharacter object
 async function fetchCharacterData() {
@@ -168,8 +168,10 @@ async function fetchCharacterData() {
         }
     })
 }
+// ------------
 
 
+// ------------
 // Refactored:
 // This function was created to be seperated from the function that assigns
 // all new values to the newCharacter object
@@ -189,8 +191,6 @@ async function sendNewCharacterData(character) {
     // as JSON
     .then(response => response.json());
 }
-
-// Refactored:
 // the logic containing POST request is cut and pasted into its own function
 // that function is invoked in this function with the newCharacter object being
 // passed into it as an argument
@@ -248,17 +248,10 @@ function setNewCharacterData() {
     // refetch the new set of data that was just created
     fetchCharacterData();
 }
+// ------------
 
 
-
-
-// Refactored:
-// Each description function (changeRaceDescription, changeClassDescription, changeAlignmentDescription)
-// I have seperated by fetch call and DOM manipulation 
-// The functions that handle the fetch calls will return a promise
-// once resolved, the returning data is called into a new function that appends data for the
-// character race/class/alignment descriptions
-
+// ------------
 // these functions are invoked by the async functions below
 // the promised data is passed into these functions as arguments
 // and will create DOM elements that will display useful descriptions
@@ -269,12 +262,13 @@ function createRaceDescription(data) {
     const abilityPoints = document.createElement('div')
     const raceDescription = document.getElementById('race-description');
     raceDescription.innerHTML = ''
-    const bonuses = data.ability_bonuses                        
-    bonuses.forEach(element => 
-        console.log('bonus: ' +
-            element.ability_score.index + ' ' +
-            element.bonus
-    ));
+    const bonuses = data.ability_bonuses 
+    // debugger                       
+    // bonuses.forEach(element => 
+    //     console.log('bonus: ' +
+    //         element.ability_score.index + ' ' +
+    //         element.bonus
+    // ));
     // bonus values reset
     str = 0;
     con = 0;
@@ -303,7 +297,6 @@ function createRaceDescription(data) {
             cha = element.bonus;
         }
     });              
-
     desc.innerHTML = `<h2>${data.name}</h2>
                       <p>Speed: ${data.speed}</p>
                       <p>Languages: ${data.language_desc}</p>`;
@@ -380,6 +373,8 @@ async function fetchRaceDescription() {
         createRaceDescription(data);
     });
 }
+// ------------
+
 
 // changes button color on mouse over and resets on mouse out
 function setHoverColor() {
