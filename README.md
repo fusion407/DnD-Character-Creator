@@ -1,15 +1,17 @@
-Dungeons and Dragons - Character Creator
-
-Hello! This is my first project in phase 1 of the software engineering course at Flatiron School flex program.
-
-The goal for this project is to create a single page web application which fetches data from a public API. The criterias which must be met includes 3 unique event listeners, at least one instance of array iteration using available Javascript methods (map, forEach, or filter), and using json-server to persist the applications interactivity.
-
-HOW TO USE:
-Upon opening the application, the user is met with a start page which will eventually show all characters created.
-Clicking "New Character" will display the create character container.
+![4](https://user-images.githubusercontent.com/61926486/189258672-3a6d6e62-e64d-4909-814a-23d72ec560b6.png)
 
 
-Link to project page:
+This is a single-page application I made for my coding bootcamp, Flatiron. It is a Dungeons and Dragons character creator, which fetches JSON data from the DnD 5th Edition API to assist the user in the character creation process, and help dungeon masters manage the stats for all the characters in their campaign.
+
+In order to use this app, you must run json server on db.json.
+
+$ json-server --watch db.json
+
+Then just open index.html or use my link below for the project page, click New Character then you're good to create your character.
+
+Once a character is created, the data gets saved into your database and a card will be appended to the character screen. The user may delete any character, an edit button will be implemented in the future.
+
+Link to project page: (requires json server running db.json)
 https://fusion407.github.io/phase-1-project/
 
 Dungeons and Dragons 5th Edition API:
@@ -20,6 +22,5 @@ Crescentmoon By - Dragon Logo Vector Png Clipart
 https://www.pikpng.com/pngvi/iomRbiw_logo-crescentmoon-by-dragon-logo-vector-png-clipart/
 
 Fonts by Google:
-https://fonts.google.com/
 Cinzel -
 https://fonts.googleapis.com/css2?family=Cinzel:wght@400;900&display=swap
