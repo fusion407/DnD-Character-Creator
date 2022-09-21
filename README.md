@@ -14,6 +14,12 @@ Once a character is created, the data gets saved into your database and a card w
 Link to project page: (requires json server running db.json)
 https://fusion407.github.io/phase-1-project/
 
+Video:
+https://www.youtube.com/watch?v=VmQ6dHvnKIM&ab_channel=DaveGray
+
+Blog:
+https://dev.to/fusion407/simple-dungeons-and-dragons-creator-1op4
+
 Dungeons and Dragons 5th Edition API:
 https://www.dnd5eapi.co/
 
