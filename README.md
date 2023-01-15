@@ -8,7 +8,8 @@ This is a single-page application I made for my coding bootcamp, Flatiron. It is
 Deployment: https://fusion407.github.io/DnD-Character-Creator/
 
 ---------------------
-#Usage
+
+Usage:
 
 you must run a json-server
 
@@ -16,7 +17,7 @@ $ json-server --watch db.json
 
 Then just open index.html or use my link below for the project page, click New Character then you're good to create your character.
 
-Once a character is created, the data gets saved into your database and a card will be appended to the character screen. The user may delete any character, an edit button will be implemented in the future.
+Once a character is created, the data gets saved into your database and a card will be appended to the character screen. The user may delete any character.
 ---------------------
 
 Link to project page: (requires json server running db.json)
