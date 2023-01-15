@@ -3,6 +3,8 @@
 
 This is a single-page application I made for my coding bootcamp, Flatiron. It is a Dungeons and Dragons character creator, which fetches JSON data from the DnD 5th Edition API to assist the user in the character creation process, and help dungeon masters manage the stats for all the characters in their campaign.
 
+Deployment: https://fusion407.github.io/DnD-Character-Creator/
+
 In order to use this app, you must run json server on db.json.
 
 $ json-server --watch db.json
