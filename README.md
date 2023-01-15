@@ -1,3 +1,5 @@
+# Dungeons and Dragons Character Creator
+----------------------
 ![4](https://user-images.githubusercontent.com/61926486/189258672-3a6d6e62-e64d-4909-814a-23d72ec560b6.png)
 
 
@@ -5,13 +7,17 @@ This is a single-page application I made for my coding bootcamp, Flatiron. It is
 
 Deployment: https://fusion407.github.io/DnD-Character-Creator/
 
-In order to use this app, you must run json server on db.json.
+---------------------
+#Usage
+
+you must run a json-server
 
 $ json-server --watch db.json
 
 Then just open index.html or use my link below for the project page, click New Character then you're good to create your character.
 
 Once a character is created, the data gets saved into your database and a card will be appended to the character screen. The user may delete any character, an edit button will be implemented in the future.
+---------------------
 
 Link to project page: (requires json server running db.json)
 https://fusion407.github.io/phase-1-project/
