@@ -6,22 +6,23 @@
 This is a single-page application I made for my coding bootcamp, Flatiron. It is a Dungeons and Dragons character creator, which fetches JSON data from the DnD 5th Edition API to assist the user in the character creation process, and help dungeon masters manage the stats for all the characters in their campaign.
 
 Deployment: https://fusion407.github.io/DnD-Character-Creator/
+(This is just a sample page, to save characters you must download this repository and run json-server)
 
 ---------------------
 
-Usage:
+## Usage
 
-you must run a json-server
+Clone this repository and open using Unix terminal.
 
+Run json-server
+
+```
 $ json-server --watch db.json
+```
 
-Then just open index.html or use my link below for the project page, click New Character then you're good to create your character.
+Open index.html
 
-Once a character is created, the data gets saved into your database and a card will be appended to the character screen. The user may delete any character.
 ---------------------
-
-Link to project page: (requires json server running db.json)
-https://fusion407.github.io/phase-1-project/
 
 Video:
 https://www.youtube.com/watch?v=VmQ6dHvnKIM&ab_channel=DaveGray
@@ -36,6 +37,6 @@ Image credit:
 Crescentmoon By - Dragon Logo Vector Png Clipart
 https://www.pikpng.com/pngvi/iomRbiw_logo-crescentmoon-by-dragon-logo-vector-png-clipart/
 
-Fonts by Google:
+Font:
 Cinzel -
 https://fonts.googleapis.com/css2?family=Cinzel:wght@400;900&display=swap
