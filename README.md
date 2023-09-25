@@ -25,7 +25,7 @@ Open index.html
 ---------------------
 
 Video:
-https://www.youtube.com/watch?v=VmQ6dHvnKIM&ab_channel=DaveGray
+https://www.youtube.com/watch?v=jMk1JpoTMJw
 
 Blog:
 https://dev.to/fusion407/simple-dungeons-and-dragons-creator-1op4
